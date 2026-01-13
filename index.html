@@ -21,242 +21,205 @@
             z-index: 9999; color: white; text-align: center;
         }
         .lock-content { width: 80%; max-width: 300px; }
-        .lock-content h2 { color: var(--gold); margin-bottom: 20px; font-size: 1.5rem; }
-        #pass-input { width: 100%; padding: 15px; border-radius: 10px; border: none; text-align: center; font-size: 1.5rem; margin-bottom: 15px; color: #000; outline: none; }
-        .btn-enter { background: var(--gold); color: black; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1rem; }
+        #pass-input { width: 100%; padding: 15px; border-radius: 12px; border: none; text-align: center; font-size: 1.5rem; margin-bottom: 15px; outline: none; background: rgba(255,255,255,0.9); color: #000; }
+        .btn-enter { background: var(--gold); color: black; border: none; padding: 15px; width: 100%; border-radius: 12px; font-weight: bold; cursor: pointer; letter-spacing: 1px; }
 
-        /* CONTENIDO APP (Oculto al inicio) */
         #app-container { display: none; }
 
-        /* Header y Versículos */
+        /* Estilos App */
         .header { background: linear-gradient(135deg, var(--accent-black), var(--dark-purple)); color: white; text-align: center; padding: 25px 15px; border-radius: 0 0 30px 30px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         .biblia-box { margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.15); border-radius: 15px; border-left: 4px solid var(--gold); text-align: left; }
-        .versiculo { font-style: italic; font-size: 0.95rem; line-height: 1.4; color: #fff; display: block; }
-        .frase-dia { font-size: 0.8rem; color: var(--gold); font-weight: bold; display: block; text-transform: uppercase; text-align: center; margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); }
+        .versiculo { font-style: italic; font-size: 0.85rem; line-height: 1.4; color: #fff; display: block; }
+        .frase-dia { font-size: 0.75rem; color: var(--gold); font-weight: bold; display: block; margin-top: 10px; text-transform: uppercase; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 5px; }
         
-        .peso-display { font-size: 2.5rem; font-weight: 900; margin: 10px 0; }
         .container { padding: 15px; max-width: 600px; margin: auto; }
         .card { background: var(--white); border-radius: 20px; padding: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; }
 
-        /* Botones */
         .btn-spotify { background: var(--spotify-green); color: white; border: none; padding: 14px; border-radius: 30px; font-weight: bold; width: 100%; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px; }
-        .btn-toggle { width: 100%; padding: 12px; border: none; border-radius: 15px; background: var(--accent-black); color: white; font-weight: bold; margin-bottom: 15px; cursor: pointer; }
         .btn-save { background: var(--dark-purple); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: bold; width: 100%; cursor: pointer; }
 
-        /* Rutinas */
-        .exercise-item { border-bottom: 1px solid #eee; padding: 15px 0; display: flex; gap: 12px; }
-        .ex-icon { font-size: 1.8rem; background: var(--light-lilac); padding: 10px; border-radius: 12px; min-width: 45px; text-align: center; height: 45px; }
-        .ex-name { font-weight: bold; color: var(--dark-purple); font-size: 1.1rem; }
-        .ex-reps { color: #d32f2f; font-weight: 800; font-size: 0.9rem; display: block; margin: 4px 0; }
-        .ex-desc { font-size: 0.85rem; color: #666; line-height: 1.4; }
+        .dia-btn { flex:1; padding:12px; border-radius:12px; border:1px solid var(--medium-purple); font-weight:bold; cursor:pointer; background:white; color: var(--medium-purple); }
+        .dia-btn.active { background: var(--medium-purple); color: white; }
 
-        /* Inputs y Selects */
-        input, select, textarea { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd; margin-bottom: 10px; box-sizing: border-box; font-size: 16px; font-family: inherit; }
-        .check { width: 35px; height: 35px; border: 2px solid var(--medium-purple); border-radius: 50%; cursor: pointer; flex-shrink: 0; }
-        .check.done { background: var(--medium-purple); color: white; display: flex; align-items: center; justify-content: center; }
-        .check.done::after { content: '✓'; font-weight: bold; }
+        .exercise-item { border-bottom: 1px solid #eee; padding: 12px 0; display: flex; gap: 12px; }
+        .ex-icon { font-size: 1.5rem; background: var(--light-lilac); padding: 10px; border-radius: 12px; min-width: 40px; text-align: center; }
+        .ex-name { font-weight: bold; color: var(--dark-purple); display: block; }
+        .ex-reps { color: #d32f2f; font-weight: 800; font-size: 0.85rem; }
 
-        /* Navegación */
         .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #ddd; z-index: 1000; }
         .nav-item { text-align: center; font-size: 0.75rem; opacity: 0.4; flex: 1; cursor: pointer; }
         .nav-item.active { opacity: 1; color: var(--dark-purple); font-weight: bold; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        .hist-img { width: 100%; border-radius: 10px; margin-top: 10px; }
+        input, select, textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 10px; font-size: 16px; box-sizing: border-box; font-family: inherit; }
     </style>
 </head>
 <body>
 
 <div id="lock-screen">
     <div class="lock-content">
-        <h2>Mi Mejor Versión con Cristo</h2>
-        <p>Introduce tu clave de acceso:</p>
-        <input type="password" id="pass-input" placeholder="****" inputmode="numeric">
-        <button class="btn-enter" onclick="checkPass()">ABRIR MI TEMPLO</button>
-        <p id="error-msg" style="color: #ff5252; margin-top: 10px; display: none;">Clave incorrecta</p>
+        <h2 style="color:var(--gold); margin-bottom: 30px;">Mi mejor versión</h2>
+        <input type="password" id="pass-input" placeholder="••••" inputmode="numeric">
+        <button class="btn-enter" onclick="checkPass()">ENTRAR</button>
+        <p id="error-msg" style="color: #ff5252; margin-top: 15px; display: none;">Clave incorrecta</p>
     </div>
 </div>
 
 <div id="app-container">
     <div class="header">
-        <div class="app-title">Mi mejor versión con Cristo</div>
+        <div class="app-title" style="font-weight: bold; letter-spacing: 1px;">MI MEJOR VERSIÓN CON CRISTO</div>
         <div class="biblia-box">
             <span id="versiculo-txt" class="versiculo"></span>
             <span id="frase-txt" class="frase-dia"></span>
         </div>
-        <div class="peso-display"><span id="peso-actual">122.2</span> <small>kg</small></div>
+        <div class="peso-display" style="font-size: 2.2rem; font-weight: 900; margin-top:10px;"><span id="peso-actual">122.2</span> <small>kg</small></div>
     </div>
 
     <div class="container">
         <div id="tab-entreno" class="tab-content active">
-            <a href="https://spotify.com" target="_blank" class="btn-spotify">🟢 MÚSICA DE ADORACIÓN</a>
-            <button class="btn-toggle" id="mode-toggle" onclick="toggleMode()">🏠 MODO: CASA (CON EQUIPO)</button>
-            
-            <div style="display:flex; gap:5px; margin-bottom:15px;">
-                <button class="dia-btn active" onclick="setDia(1, this)" style="flex:1; padding:10px; border-radius:10px; border:1px solid var(--medium-purple); font-weight:bold; cursor:pointer; background:white;">DÍA 1</button>
-                <button class="dia-btn" onclick="setDia(2, this)" style="flex:1; padding:10px; border-radius:10px; border:1px solid var(--medium-purple); font-weight:bold; cursor:pointer; background:white;">DÍA 2</button>
-                <button class="dia-btn" onclick="setDia(3, this)" style="flex:1; padding:10px; border-radius:10px; border:1px solid var(--medium-purple); font-weight:bold; cursor:pointer; background:white;">DÍA 3</button>
-                <button class="dia-btn" onclick="setDia(4, this)" style="flex:1; padding:10px; border-radius:10px; border:1px solid var(--medium-purple); font-weight:bold; cursor:pointer; background:white;">DÍA 4</button>
+            <a href="https://open.spotify.com" target="_blank" class="btn-spotify">🟢 MÚSICA DE ADORACIÓN</a>
+            <div style="display:flex; gap:8px; margin-bottom:15px;">
+                <button class="dia-btn active" onclick="setDia(1, this)">DÍA 1</button>
+                <button class="dia-btn" onclick="setDia(2, this)">DÍA 2</button>
+                <button class="dia-btn" onclick="setDia(3, this)">DÍA 3</button>
+                <button class="dia-btn" onclick="setDia(4, this)">DÍA 4</button>
             </div>
-
             <div class="card">
                 <h3 id="area-titulo" style="margin:0; color:var(--dark-purple)"></h3>
-                <p style="font-size:0.8rem; color:#888; margin-bottom:15px">Haz 4 series de cada ejercicio. ¡No te rindas!</p>
+                <p style="font-size:0.8rem; color:#888;">Bloques de 4 series (Sesión: 45-60 min)</p>
                 <div id="lista-ejercicios"></div>
-            </div>
-
-            <div class="card" style="border: 2px solid var(--gold)">
-                <h3 style="margin:0 0 10px 0;">📔 Diario de Victoria</h3>
-                <textarea id="nota-espiritual" rows="3" placeholder="Escribe tu reflexión o petición a Dios..."></textarea>
-                <button class="btn-save" style="background:var(--accent-black)" onclick="guardarNota()">GUARDAR EN DIARIO</button>
             </div>
         </div>
 
         <div id="tab-tracker" class="tab-content">
-            <div class="card" style="border: 2px solid var(--food-orange)">
-                <h3 style="color:var(--food-orange)">🍱 Mi Alimento</h3>
-                <input type="file" id="foto-input" accept="image/*" onchange="previewImagen(this)">
-                <img id="preview-comida" src="" style="width:100%; display:none; border-radius:15px; margin-bottom:10px;">
-                <textarea id="desc-comida" rows="2" placeholder="Describe tu comida saludable..."></textarea>
-                <button class="btn-save" style="background:var(--food-orange)" onclick="guardarComida()">REGISTRAR COMIDA</button>
+            <div class="card" style="border: 2px solid var(--period-pink)">
+                <h3 style="color:var(--period-pink)">🌸 Tracker de Ciclo</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                        <label style="font-size: 0.75rem; font-weight:bold;">Inicio:</label>
+                        <input type="date" id="in-ciclo-inicio">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.75rem; font-weight:bold;">Fin:</label>
+                        <input type="date" id="in-ciclo-fin">
+                    </div>
+                </div>
+                <select id="in-flujo">
+                    <option value="">💧 Intensidad del Flujo</option>
+                    <option value="Muy Ligero">Muy Ligero</option>
+                    <option value="Moderado">Moderado</option>
+                    <option value="Abundante">Abundante</option>
+                </select>
+                <textarea id="in-sintomas" rows="3" placeholder="Describe tus síntomas (dolor, ánimo, etc.)"></textarea>
+                <button class="btn-save" style="background:var(--period-pink)" onclick="saveCiclo()">GUARDAR REGISTRO</button>
             </div>
 
             <div class="card">
-                <h3>📈 Peso y Medidas</h3>
+                <h3>📈 Control de Peso</h3>
                 <input type="number" id="in-peso" step="0.1" placeholder="Peso actual (kg)">
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px">
-                    <input type="number" id="in-cintura" placeholder="Cintura (cm)">
-                    <input type="number" id="in-cadera" placeholder="Cadera (cm)">
-                    <input type="number" id="in-pecho" placeholder="Pecho (cm)">
-                    <input type="number" id="in-brazo" placeholder="Brazo (cm)">
-                </div>
-                <button class="btn-save" onclick="saveProgreso()">GUARDAR MEDIDAS</button>
-            </div>
-
-            <div class="card" style="border: 2px solid var(--period-pink)">
-                <h3 style="color:var(--period-pink)">🌸 Tracker de Ciclo</h3>
-                <label style="font-size:0.8rem; font-weight:bold;">Inicio del periodo:</label>
-                <input type="date" id="in-ciclo-inicio">
-                <label style="font-size:0.8rem; font-weight:bold;">Fin del periodo:</label>
-                <input type="date" id="in-ciclo-fin">
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px">
-                    <select id="in-flujo">
-                        <option value="">💧 Flujo</option>
-                        <option value="Muy Ligero">Muy Ligero</option>
-                        <option value="Moderado">Moderado</option>
-                        <option value="Abundante">Abundante</option>
-                    </select>
-                    <select id="in-sintoma">
-                        <option value="">😖 Síntoma</option>
-                        <option value="Sin dolor">Sin dolor</option>
-                        <option value="Cólicos">Cólicos</option>
-                        <option value="Dolor de espalda">Dolor espalda</option>
-                    </select>
-                </div>
-                <button class="btn-save" style="background:var(--period-pink)" onclick="saveCiclo()">REGISTRAR CICLO</button>
+                <button class="btn-save" onclick="saveProgreso()">ACTUALIZAR PESO</button>
             </div>
         </div>
 
         <div id="tab-historial" class="tab-content">
-            <div style="display:flex; justify-content:space-between; padding:10px;">
-                <h3>📜 Historial Completo</h3>
-                <button onclick="exportarHistorial()" style="background:var(--gold); border:none; border-radius:8px; padding:5px 15px; font-weight:bold; cursor:pointer;">EXPORTAR</button>
-            </div>
+            <h3 style="padding-left: 10px;">📜 Historial de Progreso</h3>
             <div id="historial-render"></div>
         </div>
     </div>
 
     <nav class="nav-bar">
-        <div class="nav-item active" onclick="showTab('tab-entreno', this)"><span>🏋️</span><br>Entreno</div>
-        <div class="nav-item" onclick="showTab('tab-tracker', this)"><span>📊</span><br>Tracker</div>
-        <div class="nav-item" onclick="showTab('tab-historial', this)"><span>📜</span><br>Notas</div>
+        <div class="nav-item active" onclick="showTab('tab-entreno', this)">🏋️<br>Entreno</div>
+        <div class="nav-item" onclick="showTab('tab-tracker', this)">📊<br>Tracker</div>
+        <div class="nav-item" onclick="showTab('tab-historial', this)">📜<br>Notas</div>
     </nav>
 </div>
 
 <script>
-    // SISTEMA DE SEGURIDAD
-    const CLAVE_MAESTRA = "7481";
+    const CLAVE = "7481";
 
     function checkPass() {
-        const val = document.getElementById('pass-input').value;
-        if(val === CLAVE_MAESTRA) {
+        if(document.getElementById('pass-input').value === CLAVE) {
             document.getElementById('lock-screen').style.display = 'none';
             document.getElementById('app-container').style.display = 'block';
-            // Iniciar la app después de desbloquear
             updateEspiritual();
-            render();
+            setDia(1, document.querySelector('.dia-btn.active'));
         } else {
             document.getElementById('error-msg').style.display = 'block';
             document.getElementById('pass-input').value = "";
         }
     }
 
-    // LÓGICA DE LA APP
-    let isViaje = false;
-    let diaActual = 1;
-    let dbLogs = [];
-
     const CONTENIDO_ESPIRITUAL = [
-        { v: '"¿No te he dicho que si crees, verás la gloria de Dios? (Juan 11:40).', f: 'Juan 11:40 - TU FUERZA ES SOBRENATURAL' },
-        { v: '"¿O ignoráis que vuestro cuerpo es templo del Espíritu Santo?"', f: '1 Corintios 6:19-20 - ERES UN TEMPLO SAGRADO' },
-        { v: '"Todo lo puedo en Cristo que me fortalece."', f: 'Filipenses 4:13 - VICTORIA EN ÉL' }
+        { 
+            v: '"¿No te he dicho que si crees, verás la gloria de Dios? (Juan 11:40). Mas los que esperan a Jehová tendrán nuevas fuerzas; levantarán alas como las águilas; correrán, y no se cansarán; caminarán, y no se fatigarán."', 
+            f: 'RVR1960 - JUAN 11:40 / ISAÍAS 40:31' 
+        },
+        { 
+            v: '"¿O ignoráis que vuestro cuerpo es templo del Espíritu Santo, el cual está en vosotros, el cual tenéis de Dios, y que no sois vuestros? Porque habéis sido comprados por precio; glorificad, pues, a Dios en vuestro cuerpo y en vuestro espíritu, los cuales son de Dios."', 
+            f: 'RVR1960 - 1 CORINTIOS 6:19-20' 
+        },
+        { 
+            v: '"Yo te alabaré; porque formidables, maravillosas son tus obras; Estoy maravillado, Y mi alma lo sabe muy bien. No fue encubierto de ti mi cuerpo, Bien que en oculto fui formado, Y entretejido en lo más profundo de la tierra."', 
+            f: 'RVR1960 - SALMOS 139:14-15' 
+        }
     ];
 
     const RUTINAS = {
-        casa: {
-            1: { t: "Piernas y Glúteos (Casa)", e: [
-                {n:"Sentadilla con Barra", r:"4 x 15", i:"🦵", d:"Barra tras nuca. Baja con espalda recta."},
-                {n:"Thigh Master Muslos", r:"4 x 30", i:"🌸", d:"Aprieta el aparato fuerte entre rodillas."},
-                {n:"Peso Muerto (Barra)", r:"4 x 15", i:"🏋️", d:"Baja barra rozando piernas."},
-                {n:"Step Lateral Mat", r:"3 x 1 min", i:"🏃", d:"Pasos laterales constantes."}
-            ]},
-            2: { t: "Tren Superior (Casa)", e: [
-                {n:"Remo con Barra", r:"4 x 15", i:"💪", d:"Tira de la barra hacia tu ombligo."},
-                {n:"Press Militar", r:"4 x 12", i:"⬆️", d:"Empuja hacia arriba desde hombros."},
-                {n:"Thigh Master Pecho", r:"4 x 25", i:"🎀", d:"Presiona el aparato frente al pecho."}
-            ]},
-            3: { t: "Abdomen y Core (Casa)", e: [
-                {n:"Plancha Rodillas", r:"4 x 45 seg", i:"🛡️", d:"Aprieta el ombligo."},
-                {n:"Giro Ruso", r:"4 x 20", i:"🔄", d:"Gira barra lado a lado."},
-                {n:"Crunch Master", r:"4 x 15", i:"🌸", d:"Eleva hombros apretando core."}
-            ]},
-            4: { t: "Cuerpo Completo (Casa)", e: [
-                {n:"Sentadilla + Press", r:"4 x 12", i:"🚀", d:"Sentadilla y empuja arriba."},
-                {n:"Burpees Adaptados", r:"4 x 10", i:"⚡", d:"Manos al mat y estira arriba."},
-                {n:"Boxeo Sombra", r:"4 x 2 min", i:"🥊", d:"Golpes constantes para cardio."}
-            ]}
-        },
-        viaje: {
-            1: { t: "Piernas (Viaje)", e: [{n:"Sentadilla Aire", r:"4x20", i:"🦵", d:"Sin peso."}]},
-            2: { t: "Superior (Viaje)", e: [{n:"Flexión Pared", r:"4x15", i:"🧱", d:"Contra la pared."}]},
-            3: { t: "Abdomen (Viaje)", e: [{n:"Plancha", r:"4x30s", i:"🛡️", d:"Posición recta."}]},
-            4: { t: "Cardio (Viaje)", e: [{n:"Marcha Rápida", r:"4x3min", i:"🔥", d:"Mueve brazos y piernas."}]}
-        }
+        1: { t: "Día 1: Piernas y Glúteos", e: [
+            {n:"Calentamiento", r:"8 min", i:"🔄", d:"Movilidad de cadera y sentadillas sin peso."},
+            {n:"Sentadilla con Barra", r:"4 x 15 (Descanso 60s)", i:"🏋️", d:"Enfócate en bajar con control y subir con fuerza."},
+            {n:"Thigh Master Muslos", r:"4 x 30", i:"🌸", d:"Aprieta fuerte al centro, aguanta 1 seg."},
+            {n:"Peso Muerto Rumano", r:"4 x 15", i:"🦾", d:"Barra pegada a piernas, siente el estiramiento."},
+            {n:"Step Lateral con Banda", r:"4 x 1 min", i:"🏃", d:"Paso lateral constante bajo tensión."},
+            {n:"Estiramiento", r:"5 min", i:"🙏", d:"Relajación de tren inferior."}
+        ]},
+        2: { t: "Día 2: Tren Superior", e: [
+            {n:"Calentamiento Brazos", r:"7 min", i:"🔄", d:"Círculos de hombros y movilidad de codos."},
+            {n:"Remo con Barra", r:"4 x 15", i:"💪", d:"Tira hacia el ombligo apretando la espalda."},
+            {n:"Press Militar", r:"4 x 12", i:"⬆️", d:"Empuja hacia arriba con control abdominal."},
+            {n:"Thigh Master Pecho", r:"4 x 25", i:"🎀", d:"Presiona frente al pecho con codos abiertos."},
+            {n:"Bíceps con Barra", r:"4 x 15", i:"🦾", d:"Sube en 1 seg, baja en 3 seg."},
+            {n:"Caminata Rápida", r:"12 min", i:"🔥", d:"Ritmo de cardio moderado constante."}
+        ]},
+        3: { t: "Día 3: Abdomen y Core", e: [
+            {n:"Plancha Rodillas", r:"4 x 1 min", i:"🛡️", d:"Cuerpo alineado, abdomen contraído."},
+            {n:"Giro Ruso con Barra", r:"4 x 20", i:"🔄", d:"Gira el tronco lado a lado lentamente."},
+            {n:"Bicicleta Abdominal", r:"4 x 25", i:"🚴", d:"Codo toca rodilla opuesta."},
+            {n:"Crunch con Aparato", r:"4 x 20", i:"🌸", d:"Sube solo usando el abdomen, no el cuello."},
+            {n:"Superman (Lumbares)", r:"4 x 15", i:"🦸", d:"Boca abajo, eleva extremidades simultáneas."},
+            {n:"Estiramiento Cobra", r:"5 min", i:"🧘", d:"Estira la zona abdominal."}
+        ]},
+        4: { t: "Día 4: Full Body", e: [
+            {n:"Sentadilla + Press", r:"4 x 12", i:"🚀", d:"Movimiento combinado de piernas y hombros."},
+            {n:"Burpees Adaptados", r:"4 x 10", i:"⚡", d:"Manos al suelo, paso atrás y arriba."},
+            {n:"Boxeo Sombra", r:"4 x 3 min", i:"🥊", d:"Golpes fluidos con música de ánimo."},
+            {n:"Zancadas Alternas", r:"4 x 16", i:"🚶", d:"Controla el equilibrio en cada paso."},
+            {n:"Marcha Rodillas Altas", r:"5 min", i:"🔥", d:"Manten el pulso elevado al final."},
+            {n:"Oración y Cierre", r:"5 min", i:"✨", d:"Agradece por tu cuerpo hoy."}
+        ]}
     };
 
     function updateEspiritual() {
-        const index = Math.floor(Math.random() * CONTENIDO_ESPIRITUAL.length);
-        document.getElementById('versiculo-txt').innerText = CONTENIDO_ESPIRITUAL[index].v;
-        document.getElementById('frase-txt').innerText = CONTENIDO_ESPIRITUAL[index].f;
-    }
-
-    function toggleMode() {
-        isViaje = !isViaje;
-        document.getElementById('mode-toggle').innerText = isViaje ? "✈️ MODO: VIAJE (SIN EQUIPO)" : "🏠 MODO: CASA (CON EQUIPO)";
-        render();
+        const item = CONTENIDO_ESPIRITUAL[Math.floor(Math.random()*CONTENIDO_ESPIRITUAL.length)];
+        document.getElementById('versiculo-txt').innerText = item.v;
+        document.getElementById('frase-txt').innerText = item.f;
     }
 
     function setDia(d, btn) {
-        diaActual = d;
-        document.querySelectorAll('.dia-btn').forEach(b => {
-            b.classList.remove('active');
-            b.style.background = "white";
-            b.style.color = "var(--medium-purple)";
-        });
+        document.querySelectorAll('.dia-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        btn.style.background = "var(--medium-purple)";
-        btn.style.color = "white";
-        render();
+        const data = RUTINAS[d];
+        document.getElementById('area-titulo').innerText = data.t;
+        document.getElementById('lista-ejercicios').innerHTML = data.e.map(ex => `
+            <div class="exercise-item">
+                <div class="ex-icon">${ex.i}</div>
+                <div>
+                    <span class="ex-name">${ex.n}</span>
+                    <span class="ex-reps">${ex.r}</span>
+                    <small style="color:#666; display:block;">${ex.d}</small>
+                </div>
+            </div>
+        `).join('');
     }
 
     function showTab(id, el) {
@@ -266,48 +229,16 @@
         el.classList.add('active');
     }
 
-    function render() {
-        const modo = isViaje ? 'viaje' : 'casa';
-        const data = RUTINAS[modo][diaActual];
-        document.getElementById('area-titulo').innerText = data.t;
-        document.getElementById('lista-ejercicios').innerHTML = data.e.map(ex => `
-            <div class="exercise-item">
-                <div class="ex-icon">${ex.i}</div>
-                <div class="ex-info">
-                    <span class="ex-name">${ex.n}</span>
-                    <span class="ex-reps">${ex.r}</span>
-                    <p class="ex-desc">${ex.d}</p>
-                </div>
-                <div class="check" onclick="this.classList.toggle('done')"></div>
-            </div>
-        `).join('');
-    }
-
-    function previewImagen(input) {
-        if (input.files && input.files[0]) {
-            let reader = new FileReader();
-            reader.onload = (e) => {
-                const img = document.getElementById('preview-comida');
-                img.src = e.target.result;
-                img.style.display = 'block';
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    function guardarComida() {
-        const desc = document.getElementById('desc-comida').value;
-        const img = document.getElementById('preview-comida').src;
-        addHistorial(`🍱 Comida: ${desc}`, img.startsWith('data') ? img : null);
-        document.getElementById('desc-comida').value = "";
-        document.getElementById('preview-comida').style.display = 'none';
-    }
-
-    function guardarNota() {
-        const nota = document.getElementById('nota-espiritual').value;
-        if(nota) {
-            addHistorial(`🕊️ Reflexión: ${nota}`);
-            document.getElementById('nota-espiritual').value = "";
+    function saveCiclo() {
+        const inicio = document.getElementById('in-ciclo-inicio').value;
+        const fin = document.getElementById('in-ciclo-fin').value;
+        const flujo = document.getElementById('in-flujo').value;
+        const sintomas = document.getElementById('in-sintomas').value;
+        if(inicio && fin) {
+            addHistorial(`🌸 <b>CICLO:</b> Inicio ${inicio} | Fin ${fin}<br>Flujo: ${flujo || 'N/A'}<br>Síntomas: ${sintomas || 'Sin detalles'}`);
+            alert("Registro de ciclo guardado.");
+        } else {
+            alert("Por favor selecciona las fechas.");
         }
     }
 
@@ -315,32 +246,17 @@
         const p = document.getElementById('in-peso').value;
         if(p) {
             document.getElementById('peso-actual').innerText = p;
-            addHistorial(`⚖️ Peso: ${p}kg`);
+            addHistorial(`⚖️ <b>PESO:</b> ${p} kg`);
+            alert("Peso actualizado.");
         }
     }
 
-    function saveCiclo() {
-        const inicio = document.getElementById('in-ciclo-inicio').value;
-        if(inicio) addHistorial(`🌸 Ciclo: Inicio ${inicio}`);
-    }
-
-    function addHistorial(txt, img = null) {
-        const fecha = new Date().toLocaleString();
-        dbLogs.push({fecha, txt});
+    function addHistorial(txt) {
         const div = document.createElement('div');
         div.className = 'card';
         div.style.borderLeft = "5px solid var(--medium-purple)";
-        div.innerHTML = `<small><b>${fecha}</b></small><br>${txt}${img ? `<br><img src="${img}" class="hist-img">` : ''}`;
+        div.innerHTML = `<small><b>${new Date().toLocaleDateString()}</b></small><br>${txt}`;
         document.getElementById('historial-render').prepend(div);
-    }
-
-    function exportarHistorial() {
-        let texto = dbLogs.map(log => `[${log.fecha}] ${log.txt}`).join('\n');
-        const blob = new Blob([texto], {type: "text/plain"});
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(blob);
-        a.download = "mi_progreso.txt";
-        a.click();
     }
 </script>
 </body>
