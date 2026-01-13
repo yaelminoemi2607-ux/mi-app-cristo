@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mi mejor versión con Cristo - Master</title>
+    <title>Master App: Mi mejor versión</title>
     <style>
         :root { 
             --dark-purple: #4a148c; --medium-purple: #6a1b9a; --light-lilac: #f3e5f5;
@@ -13,14 +13,14 @@
         }
         body { font-family: 'Segoe UI', sans-serif; background: var(--light-lilac); margin: 0; padding-bottom: 100px; color: var(--grey-text); overflow-x: hidden; }
         
-        /* BLOQUEO SEGURIDAD */
+        /* BLOQUEO */
         #lock-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, var(--accent-black), var(--dark-purple)); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; color: white; text-align: center; }
         #pass-input { width: 80%; max-width: 250px; padding: 15px; border-radius: 12px; border: none; text-align: center; font-size: 1.5rem; margin-bottom: 15px; outline: none; background: rgba(255,255,255,0.9); }
 
         /* INTERFAZ */
         .header { background: linear-gradient(135deg, var(--accent-black), var(--dark-purple)); color: white; text-align: center; padding: 25px 15px; border-radius: 0 0 30px 30px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         .biblia-box { margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.15); border-radius: 15px; border-left: 4px solid var(--gold); text-align: left; }
-        .versiculo { font-style: italic; font-size: 0.95rem; line-height: 1.4; color: #fff; display: block; }
+        .versiculo { font-style: italic; font-size: 0.9rem; line-height: 1.4; color: #fff; display: block; }
         .frase-dia { font-size: 0.8rem; color: var(--gold); font-weight: bold; display: block; text-transform: uppercase; text-align: center; margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); }
         .peso-display { font-size: 2.2rem; font-weight: 900; margin-top: 10px; }
 
@@ -28,18 +28,14 @@
         .card { background: var(--white); border-radius: 20px; padding: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; }
 
         .btn-spotify { background: var(--spotify-green); color: white; border: none; padding: 14px; border-radius: 30px; font-weight: bold; width: 100%; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px; }
-        .btn-calendar { background: var(--calendar-blue); color: white; border: none; padding: 12px; border-radius: 15px; font-weight: bold; width: 100%; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;}
         .btn-save { background: var(--dark-purple); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: bold; width: 100%; cursor: pointer; }
         
         .dia-btn { flex:1; padding:10px; border-radius:10px; border:1px solid var(--medium-purple); font-weight:bold; cursor:pointer; background:white; color: var(--medium-purple); }
         .dia-btn.active { background: var(--medium-purple); color: white; }
 
-        /* EJERCICIOS */
-        .exercise-item { border-bottom: 1px solid #eee; padding: 15px 0; display: flex; align-items: center; gap: 12px; transition: 0.3s; }
+        .exercise-item { border-bottom: 1px solid #eee; padding: 15px 0; display: flex; align-items: center; gap: 12px; }
         .exercise-item.completed { opacity: 0.3; }
         .ex-icon { font-size: 1.8rem; background: var(--light-lilac); padding: 10px; border-radius: 12px; min-width: 45px; text-align: center; }
-        .ex-name { font-weight: bold; color: var(--dark-purple); font-size: 1.1rem; }
-        .ex-reps { color: #d32f2f; font-weight: 800; font-size: 0.9rem; display: block; }
         
         .check { width: 35px; height: 35px; border: 2px solid var(--medium-purple); border-radius: 50%; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: bold; }
         .check.done { background: var(--medium-purple); color: white; }
@@ -53,7 +49,8 @@
         .tab-content.active { display: block; }
         
         input, select, textarea { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd; margin-bottom: 10px; box-sizing: border-box; font-size: 16px; font-family: inherit; }
-        #btn-finish { display: none; background: var(--done-green); color: white; border: none; padding: 18px; border-radius: 15px; font-weight: bold; width: 100%; margin-top: 15px; }
+        .hist-img { width: 100%; border-radius: 15px; margin-top: 10px; border: 1px solid #ddd; }
+        #preview-comida { width: 100%; display: none; border-radius: 15px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -71,122 +68,100 @@
             <span id="versiculo-txt" class="versiculo"></span>
             <span id="frase-txt" class="frase-dia"></span>
         </div>
-        <div class="peso-display"><span id="peso-actual">122.2</span> <small>kg</small></div>
+        <div class="peso-display"><span id="peso-actual">0.0</span> <small>kg</small></div>
     </div>
 
     <div class="container">
         <div id="tab-entreno" class="tab-content active">
-            <a href="https://open.spotify.com/playlist/37i9dQZF1DWX9U9S9UrGat" target="_blank" class="btn-spotify">🟢 ADORACIÓN PARA ENTRENAR</a>
-            
-            <button class="btn-toggle" id="mode-toggle" onclick="toggleMode()">🏠 MODO: EQUIPO CASA (Rosa/Morado)</button>
+            <a href="https://open.spotify.com" target="_blank" class="btn-spotify">🟢 ADORACIÓN PARA ENTRENAR</a>
             
             <div style="display:flex; gap:5px; margin-bottom:15px;">
-                <button class="dia-btn active" onclick="setDia(1, this)">DÍA 1</button>
-                <button class="dia-btn" onclick="setDia(2, this)">DÍA 2</button>
-                <button class="dia-btn" onclick="setDia(3, this)">DÍA 3</button>
-                <button class="dia-btn" onclick="setDia(4, this)">DÍA 4</button>
+                <button class="dia-btn active" onclick="setDia(1, this)">D1</button>
+                <button class="dia-btn" onclick="setDia(2, this)">D2</button>
+                <button class="dia-btn" onclick="setDia(3, this)">D3</button>
+                <button class="dia-btn" onclick="setDia(4, this)">D4</button>
             </div>
 
             <div class="card">
                 <h3 id="area-titulo" style="margin:0; color:var(--dark-purple)"></h3>
                 <div id="lista-ejercicios"></div>
-                <button id="btn-finish" onclick="finishWorkout()">🏆 GUARDAR ENTRENAMIENTO</button>
             </div>
 
             <div class="card" style="border: 2px solid var(--gold)">
-                <h3>📔 Diario de Notas y Fe</h3>
-                <textarea id="nota-espiritual" rows="3" placeholder="Escribe tu reflexión, oración o nota del día..."></textarea>
+                <h3>📔 Diario y Reflexión</h3>
+                <textarea id="nota-espiritual" rows="3" placeholder="Escribe aquí tu petición o reflexión del día..."></textarea>
                 <button class="btn-save" style="background:var(--accent-black)" onclick="guardarNota()">GUARDAR NOTA</button>
             </div>
         </div>
 
         <div id="tab-tracker" class="tab-content">
+            <div class="card" style="border: 2px solid var(--food-orange)">
+                <h3 style="color:var(--food-orange)">🍱 Registro de Alimento</h3>
+                <input type="file" id="foto-input" accept="image/*" onchange="previewImagen(this)" style="display: none;">
+                <button class="btn-save" style="background:var(--food-orange); margin-bottom: 10px;" onclick="document.getElementById('foto-input').click()">📸 TOMAR FOTO O SUBIR</button>
+                <img id="preview-comida" src="">
+                <textarea id="desc-comida" placeholder="¿Qué comiste hoy de saludable?"></textarea>
+                <button class="btn-save" style="background:var(--accent-black)" onclick="guardarComida()">REGISTRAR COMIDA</button>
+            </div>
+
             <div class="card">
-                <h3>📈 Peso y Medidas Completas</h3>
-                <label>Peso (kg):</label>
-                <input type="number" id="in-peso" step="0.1" placeholder="Ej: 122.2">
+                <h3>📈 Medidas Corporales</h3>
+                <input type="number" id="in-peso" step="0.1" placeholder="Peso (kg)">
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px">
-                    <div><label>Cintura (cm)</label><input type="number" id="in-cintura"></div>
-                    <div><label>Cadera (cm)</label><input type="number" id="in-cadera"></div>
-                    <div><label>Pecho (cm)</label><input type="number" id="in-pecho"></div>
-                    <div><label>Brazo (cm)</label><input type="number" id="in-brazo"></div>
+                    <input type="number" id="in-cintura" placeholder="Cintura (cm)">
+                    <input type="number" id="in-cadera" placeholder="Cadera (cm)">
+                    <input type="number" id="in-pecho" placeholder="Pecho (cm)">
+                    <input type="number" id="in-brazo" placeholder="Brazo (cm)">
                 </div>
-                <button class="btn-save" onclick="saveProgreso()">ACTUALIZAR PROGRESO</button>
+                <button class="btn-save" onclick="saveProgreso()">GUARDAR MEDIDAS</button>
             </div>
 
             <div class="card" style="border: 2px solid var(--period-pink)">
                 <h3 style="color:var(--period-pink)">🌸 Ciclo Menstrual</h3>
                 <label>Inicio:</label><input type="date" id="in-ciclo-inicio">
-                <label>Fin estimado:</label><input type="date" id="in-ciclo-fin">
+                <label>Fin:</label><input type="date" id="in-ciclo-fin">
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px">
                     <select id="in-flujo">
                         <option value="">💧 Flujo</option><option value="Ligero">Ligero</option><option value="Moderado">Moderado</option><option value="Abundante">Abundante</option>
                     </select>
                     <select id="in-sintoma">
-                        <option value="">😖 Síntoma</option><option value="Sin dolor">Sin dolor</option><option value="Cólicos">Cólicos</option><option value="Inflamación">Inflamación</option><option value="Antojos">Antojos</option>
+                        <option value="">😖 Síntoma</option><option value="Sin dolor">Sin dolor</option><option value="Cólicos">Cólicos</option><option value="Antojos">Antojos</option>
                     </select>
                 </div>
-                <button class="btn-calendar" onclick="linkCalendar()">📅 AGENDAR EN GOOGLE CALENDAR</button>
-                <button class="btn-save" style="background:var(--period-pink); margin-top:10px;" onclick="saveCiclo()">REGISTRAR CICLO</button>
+                <button class="btn-save" style="background:var(--period-pink)" onclick="saveCiclo()">REGISTRAR CICLO</button>
             </div>
         </div>
 
         <div id="tab-historial" class="tab-content">
-            <h3 style="margin-left:10px;">📜 Mi Historial de Victoria</h3>
+            <h3 style="margin-left:10px;">📜 Mi Historial</h3>
             <div id="historial-render"></div>
         </div>
     </div>
 
     <nav class="nav-bar">
         <div class="nav-item active" onclick="showTab('tab-entreno', this)"><span>🏋️</span><br>Entreno</div>
-        <div class="nav-item" onclick="showTab('tab-tracker', this)"><span>📊</span><br>Tracker</div>
-        <div class="nav-item" onclick="showTab('tab-historial', this)"><span>📜</span><br>Notas</div>
+        <div class="nav-item" onclick="showTab('tab-tracker', this)"><span>🍱</span><br>Tracker</div>
+        <div class="nav-item" onclick="showTab('tab-historial', this)"><span>📜</span><br>Historial</div>
     </nav>
 </div>
 
 <script>
     const CLAVE = "7481";
-    let isViaje = false;
     let diaActual = 1;
-    let dbLogs = JSON.parse(localStorage.getItem('master_app_data')) || [];
+    let currentPhoto = "";
+    let dbLogs = JSON.parse(localStorage.getItem('master_data_v10')) || [];
 
     const CONTENIDO = [
-        { v: '"¿No te he dicho que si crees, verás la gloria de Dios? (Juan 11:40). Mas los que esperan a Jehová tendrán nuevas fuerzas; levantarán alas como las águilas; correrán, y no se cansarán; caminarán, y no se fatigarán."', f: 'JUAN 11:40 / ISAÍAS 40:31' },
-        { v: '"¿O ignoráis que vuestro cuerpo es templo del Espíritu Santo, el cual está en vosotros, el cual tenéis de Dios, y que no sois vuestros? Porque habéis sido comprados por precio; glorificad, pues, a Dios en vuestro cuerpo y en vuestro espíritu, los cuales son de Dios."', f: '1 CORINTIOS 6:19-20' },
-        { v: '"Por nada estéis afanados, sino sean conocidas vuestras peticiones delante de Dios en toda oración y ruego, con acción de gracias. Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús."', f: 'FILIPENSES 4:6-7' }
+        { v: '"¿No te he dicho que si crees, verás la gloria de Dios? (Juan 11:40). Mas los que esperan a Jehová tendrán nuevas fuerzas; levantarán alas como las águilas; correrán, y no se cansarán."', f: 'FE INMOVIBLE' },
+        { v: '"¿O ignoráis que vuestro cuerpo es templo del Espíritu Santo? Porque habéis sido comprados por precio; glorificad, pues, a Dios en vuestro cuerpo."', f: 'TEMPLO DEL ESPÍRITU' },
+        { v: '"Por nada estéis afanados, sino sean conocidas vuestras peticiones delante de Dios. Y la paz de Dios guardará vuestros corazones."', f: 'PAZ SOBRENATURAL' }
     ];
 
     const RUTINAS = {
-        casa: {
-            1: { t: "Piernas y Glúteos (Mat + Thigh Master)", e: [
-                {n:"Thigh Master Muslos", r:"4 x 30", i:"🌸", d:"Sentada en mat, aprieta aparato rosa entre rodillas."},
-                {n:"Puente con Banda", r:"4 x 20", i:"🟣", d:"Tumbada, banda morada sobre rodillas y eleva cadera."},
-                {n:"Patada Glúteo con Thigh Master", r:"4 x 25", i:"🌸", d:"En cuadrupedia, aprieta aparato tras la rodilla."},
-                {n:"Sentadilla Isométrica", r:"4 x 45 seg", i:"🧘", d:"Espalda a la pared y aguanta."}
-            ]},
-            2: { t: "Tren Superior (Aparatos Rosa)", e: [
-                {n:"Thigh Master Pecho", r:"4 x 25", i:"🎀", d:"Presiona aparato rosa con palmas frente al pecho."},
-                {n:"Flexiones en Mat", r:"4 x 12", i:"🧘", d:"Apoya rodillas y baja pecho al suelo."},
-                {n:"Aperturas con Thigh Master", r:"4 x 20", i:"🌸", d:"Sujeta aparato y aprieta hacia adentro."},
-                {n:"Plancha Dinámica", r:"4 x 30 seg", i:"🛡️", d:"En mat, aprieta abdomen fuerte."}
-            ]},
-            3: { t: "Abdomen y Core (Mat)", e: [
-                {n:"Bicicleta Abdominal", r:"4 x 30", i:"🚴", d:"En mat, codo a rodilla contraria."},
-                {n:"Crunch con Thigh Master", r:"4 x 20", i:"🌸", d:"Sujeta aparato contra muslos y eleva hombros."},
-                {n:"Tijeras de Piernas", r:"4 x 30", i:"✂️", d:"Tumbada, alterna piernas sin tocar suelo."}
-            ]},
-            4: { t: "Full Body Mix (Todo el Equipo)", e: [
-                {n:"Burpees Adaptados", r:"4 x 10", i:"🚀", d:"Manos al mat, paso atrás y salto."},
-                {n:"Mix Thigh Master", r:"4 x 40", i:"🌸", d:"Alterna 20 en pecho y 20 en piernas rápido."},
-                {n:"Boxeo Sombra", r:"4 x 2 min", i:"🥊", d:"Lanza golpes constantes al aire."}
-            ]}
-        },
-        viaje: {
-            1: { t: "Piernas (Viaje)", e: [{n:"Sentadillas", r:"4x20", i:"🦵", d:"Peso corporal."}]},
-            2: { t: "Superior (Viaje)", e: [{n:"Flexiones Pared", r:"4x15", i:"🧱", d:"Empuja pared."}]},
-            3: { t: "Abdomen (Viaje)", e: [{n:"Crunch", r:"4x20", i:"🧘", d:"Sube hombros."}]},
-            4: { t: "Cardio (Viaje)", e: [{n:"Saltos Payaso", r:"4x1 min", i:"🔥", d:"Mueve todo el cuerpo."}]}
-        }
+        1: { t: "Piernas y Glúteos", e: [{n:"Thigh Master Muslos", r:"4x30", i:"🌸"}, {n:"Puente con Banda", r:"4x20", i:"🟣"}, {n:"Patada Glúteo", r:"4x25", i:"🌸"}] },
+        2: { t: "Tren Superior", e: [{n:"Thigh Master Pecho", r:"4x25", i:"🎀"}, {n:"Flexiones Mat", r:"4x12", i:"🧘"}] },
+        3: { t: "Abdomen", e: [{n:"Bicicleta", r:"4x30", i:"🚴"}, {n:"Crunch Master", r:"4x20", i:"🌸"}] },
+        4: { t: "Full Body", e: [{n:"Burpees Adaptados", r:"4x10", i:"🚀"}, {n:"Mix Equipo", r:"4x40", i:"🌸"}] }
     };
 
     function checkPass() {
@@ -197,10 +172,10 @@
         } else { alert("Clave incorrecta."); }
     }
 
-    function toggleMode() {
-        isViaje = !isViaje;
-        document.getElementById('mode-toggle').innerText = isViaje ? "✈️ MODO: VIAJE (SIN EQUIPO)" : "🏠 MODO: EQUIPO CASA (Rosa/Morado)";
-        render();
+    function updateEspiritual() {
+        const rand = Math.floor(Math.random() * CONTENIDO.length);
+        document.getElementById('versiculo-txt').innerText = CONTENIDO[rand].v;
+        document.getElementById('frase-txt').innerText = CONTENIDO[rand].f;
     }
 
     function setDia(d, btn) {
@@ -211,37 +186,61 @@
     }
 
     function render() {
-        const modo = isViaje ? 'viaje' : 'casa';
-        const data = RUTINAS[modo][diaActual];
+        const data = RUTINAS[diaActual];
         document.getElementById('area-titulo').innerText = data.t;
-        document.getElementById('btn-finish').style.display = 'none';
         document.getElementById('lista-ejercicios').innerHTML = data.e.map((ex, idx) => `
             <div class="exercise-item" id="ex-${idx}">
                 <div class="ex-icon">${ex.i}</div>
                 <div style="flex:1">
-                    <span class="ex-name">${ex.n}</span>
-                    <span class="ex-reps">${ex.r}</span>
-                    <p style="font-size:0.75rem; color:#888;">${ex.d}</p>
+                    <span style="font-weight:bold;">${ex.n}</span><br>
+                    <span style="color:red; font-size:0.8rem;">${ex.r}</span>
                 </div>
-                <div class="check" onclick="markDone(${idx})"></div>
+                <div class="check" onclick="this.classList.toggle('done'); document.getElementById('ex-${idx}').classList.toggle('completed')"></div>
             </div>
         `).join('');
     }
 
-    function markDone(idx) {
-        const item = document.getElementById(`ex-${idx}`);
-        const chk = item.querySelector('.check');
-        item.classList.toggle('completed');
-        chk.classList.toggle('done');
-        const total = document.querySelectorAll('.exercise-item').length;
-        const dones = document.querySelectorAll('.check.done').length;
-        document.getElementById('btn-finish').style.display = (total === dones) ? 'block' : 'none';
+    function previewImagen(input) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = e => {
+                currentPhoto = e.target.result;
+                document.getElementById('preview-comida').src = currentPhoto;
+                document.getElementById('preview-comida').style.display = 'block';
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
     }
 
-    function finishWorkout() {
-        addHistorial(`🏆 Entrenamiento completado: ${RUTINAS[isViaje?'viaje':'casa'][diaActual].t}`);
-        alert("¡Entrenamiento guardado en el historial!");
-        render();
+    function guardarComida() {
+        const desc = document.getElementById('desc-comida').value;
+        if(desc || currentPhoto) {
+            addHistorial(`🍱 Comida: ${desc}`, currentPhoto);
+            document.getElementById('desc-comida').value = "";
+            document.getElementById('preview-comida').style.display = 'none';
+            currentPhoto = "";
+            alert("Comida guardada.");
+        }
+    }
+
+    function saveProgreso() {
+        const p = document.getElementById('in-peso').value;
+        const cin = document.getElementById('in-cintura').value || '-';
+        const cad = document.getElementById('in-cadera').value || '-';
+        if(p) {
+            document.getElementById('peso-actual').innerText = p;
+            addHistorial(`⚖️ Peso: ${p}kg | Medidas: Cin ${cin}, Cad ${cad}`);
+            alert("Progreso guardado.");
+        }
+    }
+
+    function saveCiclo() {
+        const i = document.getElementById('in-ciclo-inicio').value;
+        const f = document.getElementById('in-ciclo-fin').value;
+        if(i) {
+            addHistorial(`🌸 Ciclo: Del ${i} al ${f}`);
+            alert("Ciclo registrado.");
+        }
     }
 
     function guardarNota() {
@@ -253,43 +252,9 @@
         }
     }
 
-    function saveProgreso() {
-        const p = document.getElementById('in-peso').value;
-        const cin = document.getElementById('in-cintura').value || '-';
-        const cad = document.getElementById('in-cadera').value || '-';
-        const pe = document.getElementById('in-pecho').value || '-';
-        const br = document.getElementById('in-brazo').value || '-';
-        if(p) {
-            document.getElementById('peso-actual').innerText = p;
-            addHistorial(`⚖️ Peso: ${p}kg | Medidas: Cin ${cin}, Cad ${cad}, Pe ${pe}, Br ${br}`);
-            alert("Medidas guardadas.");
-        }
-    }
-
-    function saveCiclo() {
-        const i = document.getElementById('in-ciclo-inicio').value;
-        const f = document.getElementById('in-ciclo-fin').value;
-        const fl = document.getElementById('in-flujo').value;
-        const si = document.getElementById('in-sintoma').value;
-        if(i && f) {
-            addHistorial(`🌸 Ciclo: ${i} al ${f} | Flujo: ${fl} | Síntoma: ${si}`);
-            alert("Ciclo registrado.");
-        }
-    }
-
-    function linkCalendar() {
-        const inicio = document.getElementById('in-ciclo-inicio').value;
-        const fin = document.getElementById('in-ciclo-fin').value;
-        if(inicio && fin) {
-            const format = (f) => f.replace(/-/g, '');
-            const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=Mi+Periodo&dates=${format(inicio)}/${format(fin)}`;
-            window.open(url, '_blank');
-        } else { alert("Selecciona fechas primero."); }
-    }
-
-    function addHistorial(txt) {
-        dbLogs.unshift({fecha: new Date().toLocaleString(), txt});
-        localStorage.setItem('master_app_data', JSON.stringify(dbLogs));
+    function addHistorial(txt, img = null) {
+        dbLogs.unshift({fecha: new Date().toLocaleString(), txt, img});
+        localStorage.setItem('master_data_v10', JSON.stringify(dbLogs));
         renderHistorial();
     }
 
@@ -297,8 +262,11 @@
         document.getElementById('historial-render').innerHTML = dbLogs.map(l => `
             <div class="card" style="border-left:5px solid var(--medium-purple)">
                 <small><b>${l.fecha}</b></small><br>${l.txt}
+                ${l.img ? `<br><img src="${l.img}" class="hist-img">` : ''}
             </div>
         `).join('');
+        const ultimoPeso = dbLogs.find(l => l.txt.includes('⚖️ Peso:'));
+        if(ultimoPeso) document.getElementById('peso-actual').innerText = ultimoPeso.txt.match(/\d+(\.\d+)?/)[0];
     }
 
     function showTab(id, el) {
@@ -306,12 +274,6 @@
         document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         el.classList.add('active');
-    }
-
-    function updateEspiritual() {
-        const rand = Math.floor(Math.random() * CONTENIDO.length);
-        document.getElementById('versiculo-txt').innerText = CONTENIDO[rand].v;
-        document.getElementById('frase-txt').innerText = CONTENIDO[rand].f;
     }
 </script>
 </body>
