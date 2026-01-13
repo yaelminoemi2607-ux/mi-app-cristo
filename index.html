@@ -21,12 +21,12 @@
             z-index: 9999; color: white; text-align: center;
         }
         .lock-content { width: 80%; max-width: 300px; }
-        .lock-content h2 { color: var(--gold); margin-bottom: 20px; }
-        #pass-input { width: 100%; padding: 15px; border-radius: 10px; border: none; text-align: center; font-size: 1.5rem; margin-bottom: 15px; color: #000; }
-        .btn-enter { background: var(--gold); color: black; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        .lock-content h2 { color: var(--gold); margin-bottom: 20px; font-size: 1.5rem; }
+        #pass-input { width: 100%; padding: 15px; border-radius: 10px; border: none; text-align: center; font-size: 1.5rem; margin-bottom: 15px; color: #000; outline: none; }
+        .btn-enter { background: var(--gold); color: black; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1rem; }
 
-        /* APP CONTENT */
-        #app-content { display: none; }
+        /* CONTENIDO APP (Oculto al inicio) */
+        #app-container { display: none; }
 
         /* Header y Versículos */
         .header { background: linear-gradient(135deg, var(--accent-black), var(--dark-purple)); color: white; text-align: center; padding: 25px 15px; border-radius: 0 0 30px 30px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
@@ -69,15 +69,15 @@
 
 <div id="lock-screen">
     <div class="lock-content">
-        <h2>Mi mejor versión con Cristo</h2>
-        <p>Introduce tu clave de acceso (7481):</p>
+        <h2>Mi Mejor Versión con Cristo</h2>
+        <p>Introduce tu clave de acceso:</p>
         <input type="password" id="pass-input" placeholder="****" inputmode="numeric">
-        <button class="btn-enter" onclick="checkPass()">ENTRAR A MI TEMPLO</button>
+        <button class="btn-enter" onclick="checkPass()">ABRIR MI TEMPLO</button>
         <p id="error-msg" style="color: #ff5252; margin-top: 10px; display: none;">Clave incorrecta</p>
     </div>
 </div>
 
-<div id="app-content">
+<div id="app-container">
     <div class="header">
         <div class="app-title">Mi mejor versión con Cristo</div>
         <div class="biblia-box">
@@ -88,9 +88,8 @@
     </div>
 
     <div class="container">
-        
         <div id="tab-entreno" class="tab-content active">
-            <a href="https://open.spotify.com/" target="_blank" class="btn-spotify">🟢 MÚSICA DE ADORACIÓN</a>
+            <a href="https://spotify.com" target="_blank" class="btn-spotify">🟢 MÚSICA DE ADORACIÓN</a>
             <button class="btn-toggle" id="mode-toggle" onclick="toggleMode()">🏠 MODO: CASA (CON EQUIPO)</button>
             
             <div style="display:flex; gap:5px; margin-bottom:15px;">
@@ -128,13 +127,32 @@
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px">
                     <input type="number" id="in-cintura" placeholder="Cintura (cm)">
                     <input type="number" id="in-cadera" placeholder="Cadera (cm)">
+                    <input type="number" id="in-pecho" placeholder="Pecho (cm)">
+                    <input type="number" id="in-brazo" placeholder="Brazo (cm)">
                 </div>
                 <button class="btn-save" onclick="saveProgreso()">GUARDAR MEDIDAS</button>
             </div>
 
             <div class="card" style="border: 2px solid var(--period-pink)">
                 <h3 style="color:var(--period-pink)">🌸 Tracker de Ciclo</h3>
+                <label style="font-size:0.8rem; font-weight:bold;">Inicio del periodo:</label>
                 <input type="date" id="in-ciclo-inicio">
+                <label style="font-size:0.8rem; font-weight:bold;">Fin del periodo:</label>
+                <input type="date" id="in-ciclo-fin">
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px">
+                    <select id="in-flujo">
+                        <option value="">💧 Flujo</option>
+                        <option value="Muy Ligero">Muy Ligero</option>
+                        <option value="Moderado">Moderado</option>
+                        <option value="Abundante">Abundante</option>
+                    </select>
+                    <select id="in-sintoma">
+                        <option value="">😖 Síntoma</option>
+                        <option value="Sin dolor">Sin dolor</option>
+                        <option value="Cólicos">Cólicos</option>
+                        <option value="Dolor de espalda">Dolor espalda</option>
+                    </select>
+                </div>
                 <button class="btn-save" style="background:var(--period-pink)" onclick="saveCiclo()">REGISTRAR CICLO</button>
             </div>
         </div>
@@ -142,7 +160,7 @@
         <div id="tab-historial" class="tab-content">
             <div style="display:flex; justify-content:space-between; padding:10px;">
                 <h3>📜 Historial Completo</h3>
-                <button onclick="exportarHistorial()" style="background:var(--gold); border:none; border-radius:8px; padding:5px 15px; font-weight:bold;">EXPORTAR</button>
+                <button onclick="exportarHistorial()" style="background:var(--gold); border:none; border-radius:8px; padding:5px 15px; font-weight:bold; cursor:pointer;">EXPORTAR</button>
             </div>
             <div id="historial-render"></div>
         </div>
@@ -156,13 +174,15 @@
 </div>
 
 <script>
-    // SISTEMA DE BLOQUEO
-    const CLAVE_CORRECTA = "7481";
+    // SISTEMA DE SEGURIDAD
+    const CLAVE_MAESTRA = "7481";
+
     function checkPass() {
-        const input = document.getElementById('pass-input').value;
-        if(input === CLAVE_CORRECTA) {
+        const val = document.getElementById('pass-input').value;
+        if(val === CLAVE_MAESTRA) {
             document.getElementById('lock-screen').style.display = 'none';
-            document.getElementById('app-content').style.display = 'block';
+            document.getElementById('app-container').style.display = 'block';
+            // Iniciar la app después de desbloquear
             updateEspiritual();
             render();
         } else {
@@ -171,41 +191,46 @@
         }
     }
 
-    // VARIABLES DE ESTADO
+    // LÓGICA DE LA APP
     let isViaje = false;
     let diaActual = 1;
     let dbLogs = [];
 
     const CONTENIDO_ESPIRITUAL = [
-        { v: '"Todo lo puedo en Cristo que me fortalece." - Filipenses 4:13', f: 'TU FUERZA ES SOBRENATURAL' },
-        { v: '"¿No sabéis que vuestro cuerpo es templo del Espíritu Santo?" - 1 Cor 6:19', f: 'ERES UN TEMPLO SAGRADO' }
+        { v: '"¿No te he dicho que si crees, verás la gloria de Dios? (Juan 11:40).', f: 'Juan 11:40 - TU FUERZA ES SOBRENATURAL' },
+        { v: '"¿O ignoráis que vuestro cuerpo es templo del Espíritu Santo?"', f: '1 Corintios 6:19-20 - ERES UN TEMPLO SAGRADO' },
+        { v: '"Todo lo puedo en Cristo que me fortalece."', f: 'Filipenses 4:13 - VICTORIA EN ÉL' }
     ];
 
     const RUTINAS = {
         casa: {
-            1: { t: "Día 1: Piernas y Glúteos", e: [
-                {n:"Sentadilla con Barra", r:"4 x 15", i:"🦵", d:"Espalda recta, baja con control."},
-                {n:"Thigh Master Muslos", r:"4 x 30", i:"🌸", d:"Aprieta fuerte entre rodillas."},
-                {n:"Remo con Banda", r:"4 x 15", i:"🏋️", d:"Tira de la banda hacia tu abdomen."}
+            1: { t: "Piernas y Glúteos (Casa)", e: [
+                {n:"Sentadilla con Barra", r:"4 x 15", i:"🦵", d:"Barra tras nuca. Baja con espalda recta."},
+                {n:"Thigh Master Muslos", r:"4 x 30", i:"🌸", d:"Aprieta el aparato fuerte entre rodillas."},
+                {n:"Peso Muerto (Barra)", r:"4 x 15", i:"🏋️", d:"Baja barra rozando piernas."},
+                {n:"Step Lateral Mat", r:"3 x 1 min", i:"🏃", d:"Pasos laterales constantes."}
             ]},
-            2: { t: "Día 2: Tren Superior", e: [
-                {n:"Press Militar", r:"4 x 12", i:"💪", d:"Empuja hacia arriba."},
-                {n:"Bíceps con Barra", r:"4 x 15", i:"🦾", d:"Flexión de codos controlada."}
+            2: { t: "Tren Superior (Casa)", e: [
+                {n:"Remo con Barra", r:"4 x 15", i:"💪", d:"Tira de la barra hacia tu ombligo."},
+                {n:"Press Militar", r:"4 x 12", i:"⬆️", d:"Empuja hacia arriba desde hombros."},
+                {n:"Thigh Master Pecho", r:"4 x 25", i:"🎀", d:"Presiona el aparato frente al pecho."}
             ]},
-            3: { t: "Día 3: Abdomen", e: [
-                {n:"Plancha Rodillas", r:"4 x 45 seg", i:"🛡️", d:"Aprieta el core."},
-                {n:"Bicicleta", r:"4 x 20", i:"🚴", d:"Codo busca rodilla contraria."}
+            3: { t: "Abdomen y Core (Casa)", e: [
+                {n:"Plancha Rodillas", r:"4 x 45 seg", i:"🛡️", d:"Aprieta el ombligo."},
+                {n:"Giro Ruso", r:"4 x 20", i:"🔄", d:"Gira barra lado a lado."},
+                {n:"Crunch Master", r:"4 x 15", i:"🌸", d:"Eleva hombros apretando core."}
             ]},
-            4: { t: "Día 4: Cardio Full", e: [
-                {n:"Cardio Baile", r:"15 min", i:"💃", d:"Bachata o K-pop a tope."},
-                {n:"Burpees Adaptados", r:"4 x 10", i:"⚡", d:"Sin salto si es necesario."}
+            4: { t: "Cuerpo Completo (Casa)", e: [
+                {n:"Sentadilla + Press", r:"4 x 12", i:"🚀", d:"Sentadilla y empuja arriba."},
+                {n:"Burpees Adaptados", r:"4 x 10", i:"⚡", d:"Manos al mat y estira arriba."},
+                {n:"Boxeo Sombra", r:"4 x 2 min", i:"🥊", d:"Golpes constantes para cardio."}
             ]}
         },
         viaje: {
-            1: { t: "Viaje: Piernas", e: [{n:"Sentadilla Aire", r:"4x20", i:"🦵", d:"Sin peso."}]},
-            2: { t: "Viaje: Superior", e: [{n:"Flexión Pared", r:"4x15", i:"🧱", d:"Contra la pared."}]},
-            3: { t: "Viaje: Core", e: [{n:"Plancha", r:"4x30s", i:"🛡️", d:"Aguanta posición."}]},
-            4: { t: "Viaje: Cardio", e: [{n:"Marcha Rápida", r:"4x3min", i:"🔥", d:"Mueve brazos."}]}
+            1: { t: "Piernas (Viaje)", e: [{n:"Sentadilla Aire", r:"4x20", i:"🦵", d:"Sin peso."}]},
+            2: { t: "Superior (Viaje)", e: [{n:"Flexión Pared", r:"4x15", i:"🧱", d:"Contra la pared."}]},
+            3: { t: "Abdomen (Viaje)", e: [{n:"Plancha", r:"4x30s", i:"🛡️", d:"Posición recta."}]},
+            4: { t: "Cardio (Viaje)", e: [{n:"Marcha Rápida", r:"4x3min", i:"🔥", d:"Mueve brazos y piernas."}]}
         }
     };
 
@@ -223,8 +248,14 @@
 
     function setDia(d, btn) {
         diaActual = d;
-        document.querySelectorAll('.dia-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.dia-btn').forEach(b => {
+            b.classList.remove('active');
+            b.style.background = "white";
+            b.style.color = "var(--medium-purple)";
+        });
         btn.classList.add('active');
+        btn.style.background = "var(--medium-purple)";
+        btn.style.color = "white";
         render();
     }
 
@@ -304,7 +335,7 @@
     }
 
     function exportarHistorial() {
-        let texto = dbLogs.map(l => `[${l.fecha}] ${l.txt}`).join('\n');
+        let texto = dbLogs.map(log => `[${log.fecha}] ${log.txt}`).join('\n');
         const blob = new Blob([texto], {type: "text/plain"});
         const a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
