@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Victoria en Cristo: Edición Templo</title>
+    <title>Mi mejor versión con Cristo</title>
     <style>
         :root { 
             --dark-p: #4a148c; --med-p: #6a1b9a; --light-p: #f3e5f5;
@@ -24,7 +24,6 @@
         .container { padding: 15px; max-width: 600px; margin: auto; }
         .card { background: white; border-radius: 20px; padding: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; }
 
-        /* DETALLES DE EJERCICIO */
         .ex-item { border-bottom: 1px solid #eee; padding: 15px 0; display: flex; gap: 12px; align-items: flex-start; }
         .check-box { min-width: 30px; height: 30px; border: 2px solid var(--med-p); border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .check-box.done { background: var(--med-p); color: white; }
@@ -36,6 +35,7 @@
         .tag { font-size: 0.7rem; background: var(--light-p); padding: 3px 8px; border-radius: 5px; color: var(--med-p); font-weight: bold; }
 
         .btn-main { background: var(--dark-p); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: bold; width: 100%; cursor: pointer; margin-bottom: 10px; }
+        .btn-checkout { background: var(--gold); color: black; border: none; padding: 18px; border-radius: 15px; font-weight: 900; width: 100%; cursor: pointer; margin-top: 20px; font-size: 1rem; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); }
         .dia-btn { flex:1; padding:12px; border-radius:12px; border:1px solid #ddd; font-weight:bold; cursor:pointer; background:white; }
         .dia-btn.active { background: var(--med-p) !important; color: white !important; }
 
@@ -52,24 +52,26 @@
 <body>
 
 <div id="lock-screen">
-    <h1 style="color:var(--gold); margin:0;">VICTORIA OMEGA</h1>
-    <input type="password" id="pass-input" placeholder="0000" inputmode="numeric">
+    <h1 style="color:var(--gold); margin:0; font-size: 1.4rem; padding: 0 20px;">MI MEJOR VERSIÓN CON CRISTO</h1>
+    <p style="color:white; opacity:0.8; margin-top:10px;">Entrada Privada</p>
+    <input type="password" id="pass-input" placeholder="Clave" inputmode="numeric">
     <button class="btn-main" style="background:var(--gold); color:black; width:200px; border-radius:30px;" onclick="checkPass()">ENTRAR</button>
 </div>
 
 <div id="app-container" style="display:none;">
     <div class="header">
+        <h2 style="margin:0 0 10px 0; font-size: 1.1rem; color:var(--gold)">MI MEJOR VERSIÓN CON CRISTO</h2>
         <div class="biblia-box">
-            <span class="versiculo">"Todo lo puedo en Cristo que me fortalece. Mas los que esperan a Jehová tendrán nuevas fuerzas."</span>
-            <span class="pasaje">FILIPENSES 4:13 / ISAÍAS 40:31</span>
+            <span class="versiculo" id="v-txt"></span>
+            <span class="pasaje" id="v-pasaje"></span>
         </div>
-        <a href="spotify:playlist:37i9dQZF1DX897yW73vT5M" class="spotify-btn"><span>🎧 ABRIR SPOTIFY ALABANZA</span></a>
+        <a href="spotify:playlist:37i9dQZF1DX897yW73vT5M" class="spotify-btn"><span>🎧 SPOTIFY ALABANZA</span></a>
         <div style="font-size: 2.2rem; font-weight: 900; margin-top: 10px;"><span id="peso-actual">0.0</span> <small>kg</small></div>
     </div>
 
     <div class="container">
         <div id="tab-entreno" class="tab-content active">
-            <button class="btn-main" id="mode-btn" onclick="toggleMode()" style="background:var(--black)">🏠 MODO: EQUIPO EN CASA (ROSA/MORADO)</button>
+            <button class="btn-main" id="mode-btn" onclick="toggleMode()" style="background:var(--black)">🏠 MODO: EQUIPO EN CASA</button>
             <div style="display:flex; gap:8px; margin-bottom:15px;">
                 <button class="dia-btn active" onclick="setDia(1, this)">D1</button>
                 <button class="dia-btn" onclick="setDia(2, this)">D2</button>
@@ -78,53 +80,45 @@
             </div>
             <div class="card">
                 <h3 id="area-titulo" style="margin:0; color:var(--dark-p)"></h3>
-                <p style="font-size:0.75rem; color: #666;">⏱️ Sesión: 45-60 min. Marca cada ejercicio al terminar.</p>
+                <p style="font-size:0.75rem; color: #666;">⏱️ 45-60 min. Instrucciones detalladas abajo:</p>
                 <div id="lista-ejercicios"></div>
+                
+                <button class="btn-checkout" onclick="checkOut()">✅ FINALIZAR Y GUARDAR (CHECK-OUT)</button>
             </div>
         </div>
 
         <div id="tab-tracker" class="tab-content">
             <div class="card" style="border: 2px solid var(--gold)">
-                <h3 style="margin-top:0">📝 Diario de Victoria y Notas</h3>
-                <textarea id="nota-texto" rows="3" placeholder="Escribe tu nota, oración o victoria del día..."></textarea>
+                <h3>📝 Notas y Oraciones</h3>
+                <textarea id="nota-texto" rows="3" placeholder="Tu oración de hoy..."></textarea>
                 <button class="btn-main" onclick="saveNota()">GUARDAR NOTA</button>
             </div>
 
             <div class="card" style="border: 2px solid var(--pink)">
-                <h3 style="color:var(--pink); margin-top:0;">🌸 Ciclo Menstrual Detallado</h3>
+                <h3 style="color:var(--pink);">🌸 Ciclo Menstrual</h3>
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px">
-                    <div><small>Fecha Inicio:</small><input type="date" id="c-inicio"></div>
-                    <div><small>Fecha Fin:</small><input type="date" id="c-fin"></div>
+                    <input type="date" id="c-inicio">
+                    <input type="date" id="c-fin">
                 </div>
-                <select id="c-flujo"><option value="">Flujo: No registrado</option><option>Ligero</option><option>Moderado</option><option>Abundante</option></select>
-                <select id="c-sintoma"><option value="">Síntoma: Ninguno</option><option>Cólicos</option><option>Antojos</option><option>Fatiga</option><option>Dolor de cabeza</option></select>
+                <select id="c-flujo"><option value="">Flujo...</option><option>Ligero</option><option>Moderado</option><option>Abundante</option></select>
                 <button class="btn-main" style="background:var(--pink)" onclick="saveCiclo()">REGISTRAR CICLO</button>
             </div>
 
             <div class="card">
-                <h3 style="margin-top:0">⚖️ Medidas del Templo</h3>
-                <input type="number" id="in-peso" step="0.1" placeholder="Peso Actual (kg)">
+                <h3>⚖️ Medidas del Templo</h3>
+                <input type="number" id="in-peso" step="0.1" placeholder="Peso (kg)">
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px">
-                    <input type="number" id="in-pecho" placeholder="Pecho (cm)">
-                    <input type="number" id="in-brazo" placeholder="Brazo (cm)">
-                    <input type="number" id="in-cintura" placeholder="Cintura (cm)">
-                    <input type="number" id="in-cadera" placeholder="Cadera (cm)">
+                    <input type="number" id="in-pecho" placeholder="Pecho">
+                    <input type="number" id="in-brazo" placeholder="Brazo">
+                    <input type="number" id="in-cintura" placeholder="Cintura">
+                    <input type="number" id="in-cadera" placeholder="Cadera">
                 </div>
                 <button class="btn-main" onclick="saveStats()">ACTUALIZAR PROGRESO</button>
-            </div>
-
-            <div class="card" style="border: 2px solid var(--orange)">
-                <h3 style="color:var(--orange); margin-top:0;">📸 Nutrición</h3>
-                <input type="file" id="foto-input" accept="image/*" onchange="processImg(this)" style="display:none">
-                <button class="btn-main" style="background:var(--orange)" onclick="document.getElementById('foto-input').click()">TOMAR FOTO PLATO</button>
-                <img id="preview-img" style="width:100%; border-radius:15px; display:none; margin-bottom:10px;">
-                <textarea id="desc-comida" placeholder="¿Qué comiste?"></textarea>
-                <button class="btn-main" style="background:black" onclick="saveComida()">GUARDAR COMIDA</button>
             </div>
         </div>
 
         <div id="tab-historial" class="tab-content">
-            <h3 style="margin-left:10px">📜 Mi Historial Completo</h3>
+            <h3 style="margin-left:10px">📜 Mi Historial de Victoria</h3>
             <div id="historial-render"></div>
         </div>
     </div>
@@ -138,36 +132,30 @@
 
 <script>
     const CLAVE = "7481";
-    let db = JSON.parse(localStorage.getItem('victoria_omega_v7')) || [];
-    let isViaje = false, tempImg = "", diaActual = 1;
+    let db = JSON.parse(localStorage.getItem('mejor_version_v9')) || [];
+    let isViaje = false, diaActual = 1;
 
     const RUTINAS = {
         casa: {
             1: { t: "Piernas y Glúteos", e: [
-                {n:"Aductores (Thigh Master Rosa)", i:"Sentada en el mat con espalda recta. Coloca las alas del aparato entre tus rodillas y aprieta con fuerza hacia el centro. Sostén 1 segundo y abre controlado.", m:"5 series de 50 reps.", g:"Rosa"},
-                {n:"Puente Glúteo (Banda Morada)", i:"Boca arriba en el mat. Pon la banda sobre tus rodillas. Sube la cadera apretando glúteos y manteniendo las rodillas hacia afuera venciendo la resistencia.", m:"5 series de 30 reps.", g:"Morada"},
-                {n:"Patada Glúteo (Mat)", i:"En 4 puntos (manos y rodillas). Estira una pierna hacia atrás y súbela apretando el glúteo. No archives la espalda.", m:"4 series de 30 p/pierna.", g:"Mat"}
+                {n:"Aductores (Rosa)", i:"Aparato entre rodillas. Aprieta al centro 50 veces.", m:"5 series", g:"Rosa"},
+                {n:"Puente Glúteo (Morada)", i:"Banda sobre rodillas. Sube cadera apretando.", m:"5 series de 30", g:"Morada"},
+                {n:"Patada Glúteo (Mat)", i:"En 4 puntos, pierna atrás y arriba.", m:"4 series de 30", g:"Mat"}
             ]},
             2: { t: "Tren Superior", e: [
-                {n:"Pecho (Thigh Master Rosa)", i:"Sujeta las asas frente a tu pecho con los codos a la altura de los hombros. Cierra el aparato intentando que las manos se junten.", m:"5 series de 30 reps.", g:"Rosa"},
-                {n:"Remo (Banda Morada)", i:"Sentada con piernas estiradas. Pasa la banda por tus pies y jala los extremos hacia tu cintura apretando la espalda.", m:"4 series de 25 reps.", g:"Morada"},
-                {n:"Tríceps (Aparato Rosa)", i:"Sujeta un ala contra tu cadera y con la otra mano empuja hacia abajo para trabajar la parte trasera del brazo.", m:"4 series de 20 p/lado.", g:"Rosa"}
+                {n:"Pecho (Rosa)", i:"Cierra el aparato frente al pecho.", m:"5 series de 30", g:"Rosa"},
+                {n:"Remo (Morada)", i:"Banda en pies, jala hacia cintura.", m:"4 series de 25", g:"Morada"}
             ]},
-            3: { t: "Abdomen Fuerte", e: [
-                {n:"Crunch + Rosa", i:"Haz un abdominal corto mientras aprietas el Thigh Master entre tus rodillas al mismo tiempo.", m:"5 series de 30 reps.", g:"Rosa"},
-                {n:"Plancha Mat", i:"Apoya antebrazos en el mat. Mantén el cuerpo recto como una tabla. Ombligo hacia adentro.", m:"4 series de 1 minuto.", g:"Mat"},
-                {n:"Bicicletas", i:"Toca rodilla con codo opuesto de forma fluida sin jalar el cuello.", m:"4 series de 1 min.", g:"Mat"}
+            3: { t: "Abdomen", e: [
+                {n:"Crunch + Rosa", i:"Abdominal apretando rosa en rodillas.", m:"5 series de 30", g:"Rosa"},
+                {n:"Plancha", i:"Cuerpo recto antebrazos.", m:"4 series de 1 min", g:"Mat"}
             ]},
-            4: { t: "Full Body Mix", e: [
-                {n:"Burpees Adaptados", i:"Baja a plancha, regresa y levántate con las manos al cielo. Sin salto si prefieres bajo impacto.", m:"4 series de 15 reps.", g:"Cuerpo"},
-                {n:"Intervalos Rosa", i:"Alterna 40 segundos de apretar piernas / 40 segundos apretar brazos sin descanso.", m:"10 minutos totales.", g:"Rosa"}
+            4: { t: "Full Body", e: [
+                {n:"Burpees", i:"Plancha y manos al cielo.", m:"4 series de 15", g:"Cuerpo"}
             ]}
         },
         viaje: {
-            1: { t: "Piernas (Viaje)", e: [{n:"Sentadillas Aire", i:"Baja con la espalda recta y sube apretando glúteos.", m:"5 series de 50 reps.", g:"Aire"}]},
-            2: { t: "Brazos (Viaje)", e: [{n:"Flexiones Pared", i:"Apóyate en la pared y baja el pecho controladamente.", m:"5 series de 30 reps.", g:"Pared"}]},
-            3: { t: "Core (Viaje)", e: [{n:"Escaladores", i:"En posición de plancha, lleva rodillas al pecho rápido.", m:"5 series de 1 min.", g:"Suelo"}]},
-            4: { t: "Cardio", e: [{n:"Saltos Payaso", i:"Abre y cierra brazos y piernas con ritmo.", m:"5 series de 2 min.", g:"Aire"}]}
+            1: { t: "Piernas Viaje", e: [{n:"Sentadillas", i:"Baja y sube recto.", m:"5 x 50", g:"Aire"}]}
         }
     };
 
@@ -175,13 +163,25 @@
         if(document.getElementById('pass-input').value === CLAVE) {
             document.getElementById('lock-screen').style.display = 'none';
             document.getElementById('app-container').style.display = 'block';
+            document.getElementById('v-txt').innerText = "Todo lo puedo en Cristo que me fortalece.";
+            document.getElementById('v-pasaje').innerText = "Filipenses 4:13";
             render(); renderHistorial();
         } else { alert("Clave Incorrecta"); }
     }
 
+    function checkOut() {
+        const d = RUTINAS[isViaje ? 'viaje' : 'casa'][diaActual];
+        const confirmacion = confirm("¿Confirmas que terminaste tu rutina de hoy?");
+        if(confirmacion) {
+            addLog(`✅ ENTRENAMIENTO COMPLETADO: ${d.t} (${isViaje ? 'Modo Viaje' : 'Modo Casa'})`);
+            alert("¡Excelente trabajo! Rutina guardada en el historial.");
+            showTab('tab-historial', document.querySelectorAll('.nav-item')[2]);
+        }
+    }
+
     function toggleMode() {
         isViaje = !isViaje;
-        document.getElementById('mode-btn').innerText = isViaje ? "✈️ MODO: VIAJE (SIN EQUIPO)" : "🏠 MODO: EQUIPO EN CASA (ROSA/MORADO)";
+        document.getElementById('mode-btn').innerText = isViaje ? "✈️ MODO: VIAJE" : "🏠 MODO: CASA";
         render();
     }
 
@@ -201,71 +201,36 @@
                 <div class="ex-info">
                     <span class="ex-title">${ex.n} <span class="tag">${ex.g}</span></span>
                     <div class="ex-instr">${ex.i}</div>
-                    <div class="ex-meta">🎯 Objetivo: ${ex.m}</div>
+                    <div class="ex-meta">🎯 ${ex.m}</div>
                 </div>
             </div>`).join('');
     }
 
-    function processImg(input) {
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = new Image();
-                img.src = e.target.result;
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    const scale = 500 / img.width;
-                    canvas.width = 500; canvas.height = img.height * scale;
-                    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-                    tempImg = canvas.toDataURL('image/jpeg', 0.5);
-                    document.getElementById('preview-img').src = tempImg;
-                    document.getElementById('preview-img').style.display = 'block';
-                }
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    function addLog(txt, img = null) {
-        db.unshift({ f: new Date().toLocaleString(), t: txt, i: img });
-        localStorage.setItem('victoria_omega_v7', JSON.stringify(db));
+    function addLog(txt) {
+        db.unshift({ f: new Date().toLocaleString(), t: txt });
+        localStorage.setItem('mejor_version_v9', JSON.stringify(db));
         renderHistorial();
     }
 
     function saveNota() {
         const t = document.getElementById('nota-texto').value;
-        if(t) { addLog(`📝 Nota: ${t}`); document.getElementById('nota-texto').value = ""; alert("Nota guardada"); }
+        if(t) { addLog(`📝 Nota: ${t}`); document.getElementById('nota-texto').value = ""; alert("Guardado"); }
     }
 
     function saveStats() {
         const p = document.getElementById('in-peso').value;
-        const meds = `Peso ${p}kg | Pecho: ${document.getElementById('in-pecho').value} | Brazo: ${document.getElementById('in-brazo').value} | Cin: ${document.getElementById('in-cintura').value} | Cad: ${document.getElementById('in-cadera').value}`;
-        if(p) { addLog(`⚖️ Medidas: ${meds}`); document.getElementById('peso-actual').innerText = p; alert("Progreso guardado"); }
+        if(p) { addLog(`⚖️ Peso: ${p}kg | Medidas actualizadas`); document.getElementById('peso-actual').innerText = p; alert("Guardado"); }
     }
 
     function saveCiclo() {
         const i = document.getElementById('c-inicio').value;
-        const f = document.getElementById('c-fin').value;
-        const fl = document.getElementById('c-flujo').value;
-        const s = document.getElementById('c-sintoma').value;
-        if(i) { addLog(`🌸 Ciclo: De ${i} a ${f} | Flujo: ${fl} | Síntoma: ${s}`); alert("Ciclo registrado"); }
-    }
-
-    function saveComida() {
-        const d = document.getElementById('desc-comida').value;
-        if(d || tempImg) {
-            addLog(`🍱 Comida: ${d}`, tempImg);
-            document.getElementById('desc-comida').value = "";
-            document.getElementById('preview-img').style.display = 'none';
-            tempImg = ""; alert("Nutrición registrada");
-        }
+        if(i) { addLog(`🌸 Ciclo registrado: Inicio ${i}`); alert("Ciclo guardado"); }
     }
 
     function renderHistorial() {
         document.getElementById('historial-render').innerHTML = db.map(l => `
             <div class="card" style="border-left:5px solid var(--med-p)">
                 <small><b>${l.f}</b></small><br>${l.t}
-                ${l.i ? `<br><img src="${l.i}" class="hist-img">` : ''}
             </div>`).join('');
         const lastP = db.find(l => l.t.includes('Peso '));
         if(lastP) document.getElementById('peso-actual').innerText = lastP.t.match(/\d+(\.\d+)?/)[0];
