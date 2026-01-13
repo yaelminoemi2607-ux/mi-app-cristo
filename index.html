@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mi mejor versión con Cristo</title>
+    <title>Mi Mejor Versión - 92kg Meta</title>
     <style>
         :root { 
             --dark-purple: #4a148c; --medium-purple: #6a1b9a; --light-lilac: #f3e5f5;
             --grey-text: #424242; --accent-black: #1a1a1a; --white: #ffffff;
-            --gold: #ffd700; --food-orange: #ff9800; --period-pink: #f06292;
+            --gold: #ffd700; --food-orange: #ff9800;
         }
         
         body { font-family: 'Segoe UI', sans-serif; background: var(--light-lilac); margin: 0; padding-bottom: 100px; color: var(--grey-text); }
@@ -21,38 +21,42 @@
             z-index: 9999; color: white; text-align: center;
         }
         .lock-content { width: 80%; max-width: 300px; }
-        .lock-content h2 { color: var(--gold); margin-bottom: 20px; }
-        #pass-input { width: 100%; padding: 15px; border-radius: 10px; border: none; text-align: center; font-size: 1.2rem; margin-bottom: 15px; color: black; }
-        .btn-enter { background: var(--gold); color: black; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        .lock-content h2 { color: var(--gold); margin-bottom: 20px; font-size: 1.5rem; }
+        #pass-input { width: 100%; padding: 15px; border-radius: 10px; border: none; text-align: center; font-size: 1.5rem; margin-bottom: 15px; color: #000; outline: none; }
+        .btn-enter { background: var(--gold); color: black; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1rem; }
 
-        /* HEADER & APP */
+        /* APP CONTAINER */
         #app-container { display: none; } 
         .header { background: linear-gradient(135deg, var(--accent-black), var(--dark-purple)); color: white; text-align: center; padding: 25px 15px; border-radius: 0 0 30px 30px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         .biblia-box { margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.15); border-radius: 15px; border-left: 4px solid var(--gold); text-align: left; }
-        .versiculo { font-style: italic; font-size: 0.95rem; line-height: 1.4; color: #fff; display: block; }
-        .frase-dia { font-size: 0.8rem; color: var(--gold); font-weight: bold; display: block; text-transform: uppercase; text-align: center; margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); }
+        .versiculo { font-style: italic; font-size: 0.9rem; line-height: 1.4; color: #fff; display: block; }
         
-        .peso-display { font-size: 2.5rem; font-weight: 900; margin: 10px 0; text-align: center; }
+        .peso-display { font-size: 2.2rem; font-weight: 900; margin: 10px 0; text-align: center; }
         .container { padding: 15px; max-width: 600px; margin: auto; }
         .card { background: var(--white); border-radius: 20px; padding: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; }
 
-        input, select, textarea { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd; margin-bottom: 10px; box-sizing: border-box; font-size: 16px; }
+        input, textarea { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd; margin-bottom: 10px; box-sizing: border-box; font-size: 16px; }
         .btn-save { background: var(--dark-purple); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: bold; width: 100%; cursor: pointer; }
+        
+        /* NAV BAR */
         .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #ddd; z-index: 1000; }
         .nav-item { text-align: center; font-size: 0.75rem; opacity: 0.4; flex: 1; cursor: pointer; }
         .nav-item.active { opacity: 1; color: var(--dark-purple); font-weight: bold; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
+        
+        .ejercicio-item { display: flex; align-items: center; margin-bottom: 10px; padding: 10px; border-bottom: 1px solid #eee; }
+        .ejercicio-item:last-child { border-bottom: none; }
     </style>
 </head>
 <body>
 
 <div id="lock-screen">
     <div class="lock-content">
-        <h2>Mi mejor versión con Cristo</h2>
-        <p>Introduce tu clave privada:</p>
-        <input type="password" id="pass-input" placeholder="****">
-        <button class="btn-enter" onclick="checkPass()">ENTRAR A MI TEMPLO</button>
+        <h2>Mi Mejor Versión con Cristo</h2>
+        <p>Introduce tu clave de acceso:</p>
+        <input type="password" id="pass-input" placeholder="****" inputmode="numeric">
+        <button class="btn-enter" onclick="checkPass()">ABRIR MI TEMPLO</button>
         <p id="error-msg" style="color: #ff5252; margin-top: 10px; display: none;">Clave incorrecta</p>
     </div>
 </div>
@@ -60,73 +64,70 @@
 <div id="app-container">
     <div class="header">
         <div class="biblia-box">
-            <span id="versiculo-txt" class="versiculo"></span>
-            <span id="frase-txt" class="frase-dia"></span>
+            <span class="versiculo">"Todo lo puedo en Cristo que me fortalece." - Filipenses 4:13</span>
         </div>
-        <div class="peso-display"><span id="peso-actual">122.2</span> <small>kg</small></div>
+        <div class="peso-display">
+            <span id="peso-actual">122.0</span> <small style="font-size: 1rem; color: var(--gold);">kg</small>
+        </div>
+        <small>Meta: 92 kg (Julio 2026)</small>
     </div>
 
     <div class="container">
         <div id="tab-entreno" class="tab-content active">
-            <button class="btn-save" style="margin-bottom:15px; background: #1DB954;">MÚSICA DE ADORACIÓN</button>
             <div class="card">
-                <h3 id="area-titulo" style="margin:0; color:var(--dark-purple)">Día 1: Piernas</h3>
-                <div id="lista-ejercicios">
-                    <p>• Sentadillas con banda (15 reps)</p>
-                    <p>• Remo con banda (12 reps)</p>
-                </div>
+                <h3 style="margin-top:0; color:var(--dark-purple)">🏋️ Rutina Full Body</h3>
+                <div class="ejercicio-item">✅ Sentadillas con banda (15 reps)</div>
+                <div class="ejercicio-item">✅ Remo con banda (12 reps)</div>
+                <div class="ejercicio-item">✅ Press de pecho (12 reps)</div>
+                <div class="ejercicio-item">✅ Muslos internos - Thigh Master (15 reps)</div>
+                <div class="ejercicio-item">✅ Crunch sentado (10 reps)</div>
+                <p style="font-size: 0.8rem; color: #666;">* Realizar 3 rondas completas.</p>
             </div>
             <div class="card" style="border: 2px solid var(--gold)">
                 <h3>📔 Diario de Victoria</h3>
-                <textarea id="nota-espiritual" rows="3" placeholder="¿Cómo te fortaleció el Señor hoy?"></textarea>
+                <textarea id="nota-espiritual" rows="3" placeholder="¿Cómo te sentiste hoy?"></textarea>
                 <button class="btn-save" onclick="guardarNota()">GUARDAR REFLEXIÓN</button>
             </div>
         </div>
 
         <div id="tab-tracker" class="tab-content">
             <div class="card">
-                <h3>📊 Actualizar Peso</h3>
-                <input type="number" id="in-peso" step="0.1" placeholder="Peso actual">
-                <button class="btn-save" onclick="actualizarPeso()">GUARDAR PESO</button>
+                <h3 style="color: var(--food-orange)">📊 Registro de Peso</h3>
+                <input type="number" id="in-peso" step="0.1" placeholder="Peso actual en kg">
+                <button class="btn-save" style="background: var(--food-orange)" onclick="actualizarPeso()">ACTUALIZAR PROGRESO</button>
+            </div>
+            <div class="card">
+                <h3>💃 Cardio Baile</h3>
+                <p>Recuerda: 10-15 min de Bachata o K-pop si no tienes tiempo para la rutina completa.</p>
             </div>
         </div>
 
         <div id="tab-historial" class="tab-content">
+            <h3>📜 Tus Avances</h3>
             <div id="historial-render"></div>
         </div>
     </div>
 
     <nav class="nav-bar">
-        <div class="nav-item active" onclick="showTab('tab-entreno', this)"><span>🏋️</span>Entreno</div>
-        <div class="nav-item" onclick="showTab('tab-tracker', this)"><span>📊</span>Tracker</div>
-        <div class="nav-item" onclick="showTab('tab-historial', this)"><span>📜</span>Notas</div>
+        <div class="nav-item active" onclick="showTab('tab-entreno', this)"><span>🏋️</span><br>Entreno</div>
+        <div class="nav-item" onclick="showTab('tab-tracker', this)"><span>📊</span><br>Tracker</div>
+        <div class="nav-item" onclick="showTab('tab-historial', this)"><span>📜</span><br>Notas</div>
     </nav>
 </div>
 
 <script>
-    // LA CLAVE QUE PEDISTE
+    // CLAVE DE ACCESO
     const CLAVE_MAESTRA = "7481"; 
 
     function checkPass() {
-        const input = document.getElementById('pass-input').value;
-        if(input === CLAVE_MAESTRA) {
+        const val = document.getElementById('pass-input').value;
+        if(val === CLAVE_MAESTRA) {
             document.getElementById('lock-screen').style.display = 'none';
             document.getElementById('app-container').style.display = 'block';
-            updateEspiritual();
         } else {
             document.getElementById('error-msg').style.display = 'block';
             document.getElementById('pass-input').value = "";
         }
-    }
-
-    // Funciones básicas de la app
-    const CONTENIDO = [
-        { v: '"Todo lo puedo en Cristo que me fortalece." - Filipenses 4:13', f: 'TU FUERZA ES SOBRENATURAL' }
-    ];
-
-    function updateEspiritual() {
-        document.getElementById('versiculo-txt').innerText = CONTENIDO[0].v;
-        document.getElementById('frase-txt').innerText = CONTENIDO[0].f;
     }
 
     function showTab(id, el) {
@@ -140,7 +141,8 @@
         const p = document.getElementById('in-peso').value;
         if(p) {
             document.getElementById('peso-actual').innerText = p;
-            alert("Peso actualizado. ¡Sigue así!");
+            alert("Peso actualizado. ¡Sigue firme hacia los 92kg!");
+            document.getElementById('in-peso').value = "";
         }
     }
 
@@ -148,14 +150,24 @@
     function guardarNota() {
         const nota = document.getElementById('nota-espiritual').value;
         if(nota) {
-            const entry = { fecha: new Date().toLocaleString(), texto: "🕊️ " + nota };
+            const entry = { fecha: new Date().toLocaleDateString(), texto: nota };
             logs.unshift(entry);
-            const list = document.getElementById('historial-render');
-            list.innerHTML = logs.map(l => `<div class="card"><small>${l.fecha}</small><br>${l.texto}</div>`).join('');
+            renderHistorial();
             document.getElementById('nota-espiritual').value = "";
-            alert("Victoria registrada.");
+            alert("Victoria guardada.");
         }
     }
+
+    function renderHistorial() {
+        const div = document.getElementById('historial-render');
+        div.innerHTML = logs.map(l => `
+            <div class="card">
+                <small>${l.fecha}</small>
+                <p style="margin: 5px 0 0 0;">${l.texto}</p>
+            </div>
+        `).join('');
+    }
 </script>
+
 </body>
 </html>
