@@ -22,11 +22,11 @@
         }
         .lock-content { width: 80%; max-width: 300px; }
         .lock-content h2 { color: var(--gold); margin-bottom: 20px; }
-        #pass-input { width: 100%; padding: 15px; border-radius: 10px; border: none; text-align: center; font-size: 1.2rem; margin-bottom: 15px; }
+        #pass-input { width: 100%; padding: 15px; border-radius: 10px; border: none; text-align: center; font-size: 1.2rem; margin-bottom: 15px; color: black; }
         .btn-enter { background: var(--gold); color: black; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; }
 
         /* HEADER & APP */
-        #app-container { display: none; } /* Oculto hasta poner clave */
+        #app-container { display: none; } 
         .header { background: linear-gradient(135deg, var(--accent-black), var(--dark-purple)); color: white; text-align: center; padding: 25px 15px; border-radius: 0 0 30px 30px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         .biblia-box { margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.15); border-radius: 15px; border-left: 4px solid var(--gold); text-align: left; }
         .versiculo { font-style: italic; font-size: 0.95rem; line-height: 1.4; color: #fff; display: block; }
@@ -36,7 +36,6 @@
         .container { padding: 15px; max-width: 600px; margin: auto; }
         .card { background: var(--white); border-radius: 20px; padding: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; }
 
-        /* Botones e Inputs */
         input, select, textarea { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd; margin-bottom: 10px; box-sizing: border-box; font-size: 16px; }
         .btn-save { background: var(--dark-purple); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: bold; width: 100%; cursor: pointer; }
         .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #ddd; z-index: 1000; }
@@ -44,7 +43,6 @@
         .nav-item.active { opacity: 1; color: var(--dark-purple); font-weight: bold; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        .hist-img { width: 100%; border-radius: 10px; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -73,7 +71,10 @@
             <button class="btn-save" style="margin-bottom:15px; background: #1DB954;">MÚSICA DE ADORACIÓN</button>
             <div class="card">
                 <h3 id="area-titulo" style="margin:0; color:var(--dark-purple)">Día 1: Piernas</h3>
-                <div id="lista-ejercicios"></div>
+                <div id="lista-ejercicios">
+                    <p>• Sentadillas con banda (15 reps)</p>
+                    <p>• Remo con banda (12 reps)</p>
+                </div>
             </div>
             <div class="card" style="border: 2px solid var(--gold)">
                 <h3>📔 Diario de Victoria</h3>
@@ -83,24 +84,14 @@
         </div>
 
         <div id="tab-tracker" class="tab-content">
-            <div class="card" style="border: 2px solid var(--food-orange)">
-                <h3 style="color:var(--food-orange)">🍱 Registrar Comida</h3>
-                <input type="file" id="foto-input" accept="image/*">
-                <input type="text" id="desc-comida" placeholder="¿Qué comiste?">
-                <button class="btn-save" style="background:var(--food-orange)" onclick="guardarComida()">GUARDAR</button>
-            </div>
             <div class="card">
-                <h3>📊 Medidas</h3>
-                <input type="number" id="in-peso" step="0.1" placeholder="Peso (kg)">
-                <button class="btn-save" onclick="saveProgreso()">ACTUALIZAR PESO</button>
+                <h3>📊 Actualizar Peso</h3>
+                <input type="number" id="in-peso" step="0.1" placeholder="Peso actual">
+                <button class="btn-save" onclick="actualizarPeso()">GUARDAR PESO</button>
             </div>
         </div>
 
         <div id="tab-historial" class="tab-content">
-            <div style="display:flex; justify-content: space-between; padding: 10px;">
-                <h3>📜 Historial</h3>
-                <button onclick="exportarDatos()" style="background:var(--gold); border:none; padding:10px; border-radius:10px; font-weight:bold;">COPIA NUBE</button>
-            </div>
             <div id="historial-render"></div>
         </div>
     </div>
@@ -113,8 +104,8 @@
 </div>
 
 <script>
-    // 1. SEGURIDAD: TU CONTRASEÑA
-    const CLAVE_MAESTRA = "2026"; // Cambia este número por tu clave favorita
+    // LA CLAVE QUE PEDISTE
+    const CLAVE_MAESTRA = "7481"; 
 
     function checkPass() {
         const input = document.getElementById('pass-input').value;
@@ -124,13 +115,13 @@
             updateEspiritual();
         } else {
             document.getElementById('error-msg').style.display = 'block';
+            document.getElementById('pass-input').value = "";
         }
     }
 
-    // 2. VERSÍCULOS
+    // Funciones básicas de la app
     const CONTENIDO = [
-        { v: '"Todo lo puedo en Cristo que me fortalece." - Filipenses 4:13', f: 'TU FUERZA ES SOBRENATURAL' },
-        { v: '"¿No sabéis que vuestro cuerpo es templo del Espíritu Santo?" - 1 Cor. 6:19', f: 'ERES UN TEMPLO SAGRADO' }
+        { v: '"Todo lo puedo en Cristo que me fortalece." - Filipenses 4:13', f: 'TU FUERZA ES SOBRENATURAL' }
     ];
 
     function updateEspiritual() {
@@ -138,7 +129,6 @@
         document.getElementById('frase-txt').innerText = CONTENIDO[0].f;
     }
 
-    // 3. NAVEGACIÓN
     function showTab(id, el) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -146,32 +136,25 @@
         el.classList.add('active');
     }
 
-    // 4. FUNCIONES DE GUARDADO
-    let logs = [];
-
-    function guardarNota() {
-        const nota = document.getElementById('nota-espiritual').value;
-        if(nota) {
-            const entry = { fecha: new Date().toLocaleString(), texto: "🕊️ Reflexión: " + nota };
-            logs.unshift(entry);
-            renderHistorial();
-            document.getElementById('nota-espiritual').value = "";
-            alert("Nota guardada en el dispositivo.");
+    function actualizarPeso() {
+        const p = document.getElementById('in-peso').value;
+        if(p) {
+            document.getElementById('peso-actual').innerText = p;
+            alert("Peso actualizado. ¡Sigue así!");
         }
     }
 
-    function renderHistorial() {
-        const list = document.getElementById('historial-render');
-        list.innerHTML = logs.map(l => `<div class="card" style="border-left:5px solid var(--medium-purple)"><small>${l.fecha}</small><br>${l.texto}</div>`).join('');
-    }
-
-    function exportarDatos() {
-        const blob = new Blob([JSON.stringify(logs)], {type: "application/json"});
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(blob);
-        a.download = "respaldo_mi_app.json";
-        a.click();
-        alert("Archivo de respaldo creado. Guárdalo en tu Google Drive para sincronizar con tu otro dispositivo.");
+    let logs = [];
+    function guardarNota() {
+        const nota = document.getElementById('nota-espiritual').value;
+        if(nota) {
+            const entry = { fecha: new Date().toLocaleString(), texto: "🕊️ " + nota };
+            logs.unshift(entry);
+            const list = document.getElementById('historial-render');
+            list.innerHTML = logs.map(l => `<div class="card"><small>${l.fecha}</small><br>${l.texto}</div>`).join('');
+            document.getElementById('nota-espiritual').value = "";
+            alert("Victoria registrada.");
+        }
     }
 </script>
 </body>
