@@ -3,36 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Victoria Omega: Full Master</title>
+    <title>Victoria Omega: Master Final v6</title>
     <style>
         :root { 
             --dark-p: #4a148c; --med-p: #6a1b9a; --light-p: #f3e5f5;
             --black: #1a1a1a; --gold: #ffd700; --pink: #f06292; --orange: #ff9800; --spotify: #1DB954;
         }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--light-p); margin: 0; padding-bottom: 95px; color: #333; overflow-x: hidden; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--light-p); margin: 0; padding-bottom: 95px; color: #333; }
         
         /* BLOQUEO SEGURO */
         #lock-screen { position: fixed; inset: 0; background: linear-gradient(135deg, var(--black), var(--dark-p)); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; color: white; text-align: center; }
         #pass-input { width: 70%; max-width: 250px; padding: 15px; border-radius: 15px; border: 2px solid var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 15px; background: rgba(255,255,255,0.1); color: white; -webkit-text-security: disc; outline: none; }
 
-        /* HEADER CON SPOTIFY */
-        .header { background: linear-gradient(135deg, var(--black), var(--dark-p)); color: white; text-align: center; padding: 20px 15px; border-radius: 0 0 30px 30px; }
-        .spotify-container { margin-top: 15px; border-radius: 12px; overflow: hidden; height: 80px; background: var(--black); border: 1px solid var(--spotify); }
-        .biblia-box { margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 12px; border-left: 4px solid var(--gold); text-align: left; }
-        .versiculo { font-style: italic; font-size: 0.85rem; line-height: 1.5; display: block; }
-        .pasaje { font-weight: bold; color: var(--gold); font-size: 0.75rem; display: block; margin-top: 5px; }
+        /* HEADER */
+        .header { background: linear-gradient(135deg, var(--black), var(--dark-p)); color: white; text-align: center; padding: 25px 15px; border-radius: 0 0 30px 30px; position: relative; }
+        .biblia-box { padding: 15px; background: rgba(255,255,255,0.1); border-radius: 12px; border-left: 4px solid var(--gold); text-align: left; margin-bottom: 10px; }
+        .versiculo { font-style: italic; font-size: 0.9rem; line-height: 1.5; display: block; }
+        .pasaje { font-weight: bold; color: var(--gold); font-size: 0.8rem; display: block; margin-top: 5px; }
+
+        /* BOTÓN SPOTIFY */
+        .spotify-btn { background: var(--spotify); color: white; border: none; padding: 10px 20px; border-radius: 30px; font-weight: bold; display: flex; align-items: center; gap: 8px; cursor: pointer; margin: 10px auto; text-decoration: none; width: fit-content; font-size: 0.8rem; }
 
         .container { padding: 15px; max-width: 600px; margin: auto; }
         .card { background: white; border-radius: 20px; padding: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; }
 
-        /* RUTINA CON CHECKS */
+        /* EJERCICIOS */
         .ex-item { border-bottom: 1px solid #eee; padding: 15px 0; display: flex; gap: 12px; align-items: flex-start; }
-        .check-box { min-width: 32px; height: 32px; border: 2px solid var(--med-p); border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; margin-top: 4px; transition: 0.3s; }
-        .check-box.done { background: var(--med-p); color: white; border-color: var(--med-p); }
+        .check-box { min-width: 30px; height: 30px; border: 2px solid var(--med-p); border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .check-box.done { background: var(--med-p); color: white; }
         .check-box.done::after { content: '✓'; font-weight: bold; }
         .ex-info { flex: 1; }
         .ex-title { font-weight: 800; color: var(--dark-p); display: block; }
-        .ex-instr { background: #f9f4ff; padding: 10px; border-radius: 8px; font-size: 0.8rem; line-height: 1.4; margin: 5px 0; border-left: 3px solid var(--med-p); color: #555; }
+        .ex-instr { background: #f9f4ff; padding: 10px; border-radius: 8px; font-size: 0.85rem; border-left: 3px solid var(--med-p); margin: 5px 0; }
         .tag { font-size: 0.7rem; background: var(--light-p); padding: 3px 8px; border-radius: 5px; color: var(--med-p); font-weight: bold; }
 
         .btn-main { background: var(--dark-p); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: bold; width: 100%; cursor: pointer; margin-bottom: 10px; }
@@ -40,7 +42,7 @@
         .dia-btn.active { background: var(--med-p) !important; color: white !important; }
 
         .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #ddd; z-index: 1000; }
-        .nav-item { text-align: center; font-size: 0.7rem; opacity: 0.4; flex: 1; cursor: pointer; color: black; }
+        .nav-item { text-align: center; font-size: 0.75rem; opacity: 0.4; flex: 1; cursor: pointer; color: black; }
         .nav-item.active { opacity: 1; color: var(--dark-p); font-weight: bold; }
         
         input, textarea, select { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd; margin-bottom: 10px; box-sizing: border-box; font-size: 16px; }
@@ -53,9 +55,9 @@
 
 <div id="lock-screen">
     <h1 style="color:var(--gold); margin:0;">VICTORIA OMEGA</h1>
-    <p style="opacity:0.8; font-size: 0.8rem;">BIENVENIDA, HIJA DEL REY</p>
+    <p style="opacity:0.8; font-size: 0.9rem;">TU TEMPLO, TU VICTORIA</p>
     <input type="password" id="pass-input" placeholder="0000" inputmode="numeric">
-    <button class="btn-main" style="background:var(--gold); color:black; width:220px; border-radius:30px;" onclick="checkPass()">ENTRAR A ENTRENAR</button>
+    <button class="btn-main" style="background:var(--gold); color:black; width:200px; border-radius:30px;" onclick="checkPass()">ENTRAR</button>
 </div>
 
 <div id="app-container" style="display:none;">
@@ -64,21 +66,14 @@
             <span class="versiculo" id="v-txt"></span>
             <span class="pasaje" id="v-pasaje"></span>
         </div>
-        
-        <div class="spotify-container">
-            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DWX766v75p3uK?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-
-        <div style="display:flex; justify-content: space-around; align-items: center; margin-top:15px;">
-            <div style="text-align:center"><span id="peso-actual" style="font-size:2rem; font-weight:900;">0.0</span><br><small>KG</small></div>
-            <button onclick="location.reload()" style="background:rgba(255,255,255,0.1); border:1px solid white; color:white; padding:5px 10px; border-radius:8px; font-size:0.6rem;">CERRAR</button>
-        </div>
+        <a href="spotify:playlist:37i9dQZF1DX897yW73vT5M" class="spotify-btn"><span>🎧 SPOTIFY: ALABANZA</span></a>
+        <div style="font-size: 2rem; font-weight: 900; margin-top: 10px;"><span id="peso-actual">0.0</span> <small>kg</small></div>
     </div>
 
     <div class="container">
         <div id="tab-entreno" class="tab-content active">
             <button class="btn-main" id="mode-btn" onclick="toggleMode()" style="background:var(--black)">🏠 MODO: EQUIPO EN CASA</button>
-            <div style="display:flex; gap:5px; margin-bottom:15px;">
+            <div style="display:flex; gap:8px; margin-bottom:15px;">
                 <button class="dia-btn active" onclick="setDia(1, this)">D1</button>
                 <button class="dia-btn" onclick="setDia(2, this)">D2</button>
                 <button class="dia-btn" onclick="setDia(3, this)">D3</button>
@@ -86,98 +81,92 @@
             </div>
             <div class="card">
                 <h3 id="area-titulo" style="margin:0; color:var(--dark-p)"></h3>
-                <p style="font-size:0.7rem; color: #666; margin-bottom:15px;">⏱️ Sesión de 45-60 min. ¡Haz check al terminar cada uno!</p>
+                <p style="font-size:0.75rem; color: #666;">⏳ Duración: 45-60 min. Haz check al terminar.</p>
                 <div id="lista-ejercicios"></div>
             </div>
         </div>
 
         <div id="tab-tracker" class="tab-content">
+            <div class="card" style="border: 2px solid var(--gold)">
+                <h3 style="margin-top:0">📝 Notas y Oraciones</h3>
+                <textarea id="nota-texto" rows="4" placeholder="Escribe aquí tus pensamientos, oraciones o notas importantes..."></textarea>
+                <button class="btn-main" onclick="saveNota()">GUARDAR NOTA</button>
+            </div>
+
             <div class="card" style="border: 2px solid var(--orange)">
-                <h3 style="color:var(--orange); margin:0 0 10px 0;">📸 Registro Comida (Comprimida)</h3>
+                <h3 style="color:var(--orange); margin:0 0 10px 0;">📸 Nutrición</h3>
                 <input type="file" id="foto-input" accept="image/*" onchange="processImg(this)" style="display:none">
                 <button class="btn-main" style="background:var(--orange)" onclick="document.getElementById('foto-input').click()">TOMAR FOTO PLATO</button>
                 <img id="preview-img" style="width:100%; border-radius:15px; display:none; margin-bottom:10px;">
-                <textarea id="desc-comida" placeholder="¿Qué comiste hoy?"></textarea>
-                <button class="btn-main" style="background:black" onclick="saveComida()">GUARDAR EN HISTORIAL</button>
+                <textarea id="desc-comida" placeholder="Descripción..."></textarea>
+                <button class="btn-main" style="background:black" onclick="saveComida()">GUARDAR COMIDA</button>
             </div>
 
             <div class="card" style="border: 2px solid var(--pink)">
                 <h3 style="color:var(--pink); margin:0 0 10px 0;">🌸 Ciclo Menstrual</h3>
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px">
-                    <div><small>Inició:</small><input type="date" id="c-inicio"></div>
-                    <div><small>Terminó:</small><input type="date" id="c-fin"></div>
+                    <div><small>Inicio:</small><input type="date" id="c-inicio"></div>
+                    <div><small>Fin:</small><input type="date" id="c-fin"></div>
                 </div>
-                <select id="c-flujo"><option value="">Estado del Flujo</option><option>Ligero</option><option>Moderado</option><option>Abundante</option></select>
-                <select id="c-sintoma"><option value="">Síntoma Principal</option><option>Cólicos</option><option>Fatiga</option><option>Sensibilidad</option><option>Antojos</option></select>
-                <button class="btn-main" style="background:var(--pink)" onclick="saveCiclo()">GUARDAR CICLO</button>
+                <button class="btn-main" style="background:var(--pink)" onclick="saveCiclo()">REGISTRAR CICLO</button>
             </div>
 
             <div class="card">
-                <h3>⚖️ Medidas del Templo</h3>
+                <h3>⚖️ Antropometría</h3>
                 <input type="number" id="in-peso" step="0.1" placeholder="Peso (kg)">
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px">
-                    <input type="number" id="in-cin" placeholder="Cintura">
-                    <input type="number" id="in-cad" placeholder="Cadera">
-                    <input type="number" id="in-pe" placeholder="Pecho">
-                    <input type="number" id="in-br" placeholder="Brazo">
-                </div>
-                <button class="btn-main" onclick="saveStats()">GUARDAR PROGRESO</button>
+                <button class="btn-main" onclick="saveStats()">ACTUALIZAR PESO</button>
             </div>
         </div>
 
         <div id="tab-historial" class="tab-content">
-            <h3 style="margin: 10px;">📜 Mi Caminar de Victoria</h3>
+            <h3 style="margin-left:10px">📜 Mi Historial y Notas</h3>
             <div id="historial-render"></div>
         </div>
     </div>
 
     <nav class="nav-bar">
         <div class="nav-item active" onclick="showTab('tab-entreno', this)">🏋️<br>Rutina</div>
-        <div class="nav-item" onclick="showTab('tab-tracker', this)">📊<br>Tracker</div>
-        <div class="nav-item" onclick="showTab('tab-historial', this)">📜<br>Notas</div>
+        <div class="nav-item" onclick="showTab('tab-tracker', this)">📊<br>Registro</div>
+        <div class="nav-item" onclick="showTab('tab-historial', this)">📜<br>Historial</div>
     </nav>
 </div>
 
 <script>
     const CLAVE = "7481";
-    let db = JSON.parse(localStorage.getItem('victoria_omega_v5')) || [];
+    let db = JSON.parse(localStorage.getItem('victoria_v6_db')) || [];
     let isViaje = false, tempImg = "", diaActual = 1;
 
     const VERSICULOS = [
-        {v: "Mas los que esperan a Jehová tendrán nuevas fuerzas; levantarán alas como las águilas; correrán, y no se cansarán.", p: "Isaías 40:31 - FUERZA DIVINA"},
-        {v: "¿No te he dicho que si crees, verás la gloria de Dios? Todo es posible para el que cree.", p: "Juan 11:40 - FE INFINITA"},
-        {v: "Todo lo puedo en Cristo que me fortalece. Él es mi roca y mi salvación.", p: "Filipenses 4:13 - VICTORIA"}
+        {v: "Mas los que esperan a Jehová tendrán nuevas fuerzas; levantarán alas como las águilas.", p: "Isaías 40:31"},
+        {v: "¿No te he dicho que si crees, verás la gloria de Dios?", p: "Juan 11:40"},
+        {v: "Todo lo puedo en Cristo que me fortalece.", p: "Filipenses 4:13"}
     ];
 
     const RUTINAS = {
         casa: {
-            1: { t: "Piernas y Glúteos (Día Rosa)", e: [
-                {n:"Aductores Thigh Master", i:"5 series de 50 reps. Aprieta el aparato rosa fuerte al cerrar.", g:"Rosa"},
-                {n:"Puente Glúteo Banda", i:"5 series de 30 reps. Banda morada. Abre rodillas al subir.", g:"Morada"},
-                {n:"Sentadilla Isométrica", i:"4 series de 1 min. Espalda en pared, aparato rosa entre rodillas.", g:"Rosa"},
-                {n:"Patada Glúteo Mat", i:"4 series de 30 p/pierna. Controla el descenso.", g:"Mat"}
+            1: { t: "Piernas y Glúteos", e: [
+                {n:"Aductores Rosa", i:"5 series de 50 reps. Aprieta Thigh Master entre rodillas.", g:"Rosa"},
+                {n:"Puente Glúteo", i:"5 series de 30 reps. Banda morada. Tensión constante.", g:"Morada"},
+                {n:"Patada Glúteo Mat", i:"4 series de 30 p/p. Aprieta arriba 2 seg.", g:"Mat"}
             ]},
-            2: { t: "Tren Superior y Definición", e: [
-                {n:"Pecho Thigh Master", i:"5 series de 30 reps. Aprieta asas frente a ti.", g:"Rosa"},
-                {n:"Remo con Banda", i:"4 series de 25 reps. Codos pegados al cuerpo, jala fuerte.", g:"Morada"},
-                {n:"Tríceps Unilateral", i:"4 series de 20 p/lado. Estira brazo completamente abajo.", g:"Rosa"},
-                {n:"Flexiones Mat", i:"4 series de 15 reps. Espalda recta siempre.", g:"Mat"}
+            2: { t: "Tren Superior", e: [
+                {n:"Pecho Rosa", i:"5 series de 30 reps. Aprieta asas frente al esternón.", g:"Rosa"},
+                {n:"Remo Banda", i:"4 series de 25 reps. Codos pegados, jala atrás.", g:"Morada"}
             ]},
-            3: { t: "Core y Templo Fuerte", e: [
-                {n:"Crunch con Aparato", i:"5 series de 30 reps. Aprieta el rosa entre rodillas al subir.", g:"Rosa"},
-                {n:"Plancha Dinámica", i:"4 series de 1 min. Alterna manos y antebrazos.", g:"Mat"},
-                {n:"Bicicletas Mat", i:"4 series de 1 min total. No jales el cuello.", g:"Mat"}
+            3: { t: "Abdomen", e: [
+                {n:"Plancha Mat", i:"4 series de 1 min. Ombligo hacia adentro.", g:"Mat"},
+                {n:"Crunch Rosa", i:"5 series de 30 reps. Aprieta el rosa con rodillas.", g:"Rosa"}
             ]},
             4: { t: "Full Body Victoria", e: [
-                {n:"Burpees Adaptados", i:"4 series de 15 reps. Salto suave al final.", g:"Cuerpo"},
-                {n:"Tensión Constante", i:"10 min alternando 30s brazos / 30s piernas con Thigh Master.", g:"Rosa"}
+                {n:"Burpees Adaptados", i:"4 series de 15 reps.", g:"Cuerpo"},
+                {n:"Intervalo Rosa", i:"10 min alternando 30s piernas/brazos.", g:"Rosa"}
             ]}
         },
         viaje: {
-            1: { t: "Piernas Viaje", e: [{n:"Sentadilla Aire", i:"5 series de 50 reps.", g:"Aire"}]},
-            2: { t: "Brazos Viaje", e: [{n:"Flexiones Pared", i:"5 series de 30 reps.", g:"Pared"}]},
-            3: { t: "Core Viaje", e: [{n:"Escaladores", i:"5 series de 1 min.", g:"Suelo"}]},
-            4: { t: "Cardio Viaje", e: [{n:"Saltos Payaso", i:"5 series de 2 min.", g:"Aire"}]}
+            1: { t: "Piernas (Viaje)", e: [{n:"Sentadillas Aire", i:"5 series de 50 reps.", g:"Aire"}]},
+            2: { t: "Brazos (Viaje)", e: [{n:"Flexiones Pared", i:"5 series de 30 reps.", g:"Pared"}]},
+            3: { t: "Core (Viaje)", e: [{n:"Escaladores", i:"5 series de 1 min.", g:"Suelo"}]},
+            4: { t: "Cardio", e: [{n:"Saltos Payaso", i:"5 series de 2 min.", g:"Aire"}]}
         }
     };
 
@@ -185,15 +174,11 @@
         if(document.getElementById('pass-input').value === CLAVE) {
             document.getElementById('lock-screen').style.display = 'none';
             document.getElementById('app-container').style.display = 'block';
-            init();
-        } else { alert("Acceso Incorrecto"); }
-    }
-
-    function init() {
-        const v = VERSICULOS[Math.floor(Math.random()*VERSICULOS.length)];
-        document.getElementById('v-txt').innerText = v.v;
-        document.getElementById('v-pasaje').innerText = v.p;
-        render(); renderHistorial();
+            const v = VERSICULOS[Math.floor(Math.random()*VERSICULOS.length)];
+            document.getElementById('v-txt').innerText = v.v;
+            document.getElementById('v-pasaje').innerText = v.p;
+            render(); renderHistorial();
+        } else { alert("Clave Incorrecta"); }
     }
 
     function toggleMode() {
@@ -245,26 +230,31 @@
     function saveComida() {
         const d = document.getElementById('desc-comida').value;
         if(d || tempImg) {
-            addLog(`🍱 Comida: ${d}`, tempImg);
+            addLog(`🍱 Nutrición: ${d}`, tempImg);
             document.getElementById('desc-comida').value = "";
             document.getElementById('preview-img').style.display = 'none';
-            tempImg = ""; alert("¡Registrado!");
+            tempImg = ""; alert("¡Guardado!");
         }
+    }
+
+    function saveNota() {
+        const t = document.getElementById('nota-texto').value;
+        if(t) { addLog(`📝 Nota/Oración: ${t}`); document.getElementById('nota-texto').value = ""; alert("Nota guardada"); }
     }
 
     function saveStats() {
         const p = document.getElementById('in-peso').value;
-        if(p) { addLog(`⚖️ Medidas: Peso ${p}kg | C:${document.getElementById('in-cin').value} | Ca:${document.getElementById('in-cad').value}`); document.getElementById('peso-actual').innerText = p; alert("Templo actualizado"); }
+        if(p) { addLog(`⚖️ Peso: ${p}kg`); document.getElementById('peso-actual').innerText = p; alert("Templo actualizado"); }
     }
 
     function saveCiclo() {
         const i = document.getElementById('c-inicio').value;
-        if(i) { addLog(`🌸 Ciclo: Inicio ${i} | Síntoma: ${document.getElementById('c-sintoma').value}`); alert("Ciclo guardado"); }
+        if(i) { addLog(`🌸 Ciclo: Inicio ${i}`); alert("Ciclo registrado"); }
     }
 
     function addLog(txt, img = null) {
         db.unshift({ f: new Date().toLocaleString(), t: txt, i: img });
-        localStorage.setItem('victoria_omega_v5', JSON.stringify(db));
+        localStorage.setItem('victoria_v6_db', JSON.stringify(db));
         renderHistorial();
     }
 
