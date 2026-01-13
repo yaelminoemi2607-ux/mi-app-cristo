@@ -3,122 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Victoria Omega: Guardado Seguro</title>
+    <title>Victoria Omega: App Completa</title>
     <style>
         :root { 
-            --dark-purple: #4a148c; --medium-purple: #6a1b9a; --light-lilac: #f3e5f5;
-            --grey-text: #424242; --accent-black: #1a1a1a; --white: #ffffff;
-            --food-orange: #ff9800; --period-pink: #f06292; --gold: #ffd700;
+            --dark-p: #4a148c; --med-p: #6a1b9a; --light-p: #f3e5f5;
+            --black: #1a1a1a; --gold: #ffd700; --pink: #f06292; --orange: #ff9800;
         }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--light-lilac); margin: 0; padding-bottom: 90px; color: var(--grey-text); }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--light-p); margin: 0; padding-bottom: 90px; color: #333; overflow-x: hidden; }
         
-        /* BLOQUEO PRIVADO */
-        #lock-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, var(--accent-black), var(--dark-purple)); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; color: white; text-align: center; }
-        #pass-input { width: 70%; max-width: 250px; padding: 15px; border-radius: 15px; border: 2px solid var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 15px; outline: none; background: rgba(255,255,255,0.1); color: white; -webkit-text-security: disc; }
+        /* BLOQUEO SEGURO */
+        #lock-screen { position: fixed; inset: 0; background: linear-gradient(135deg, var(--black), var(--dark-p)); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; color: white; text-align: center; }
+        #pass-input { width: 70%; max-width: 250px; padding: 15px; border-radius: 15px; border: 2px solid var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 15px; background: rgba(255,255,255,0.1); color: white; -webkit-text-security: disc; outline: none; }
 
-        .header { background: linear-gradient(135deg, var(--accent-black), var(--dark-purple)); color: white; text-align: center; padding: 25px 15px; border-radius: 0 0 30px 30px; position: sticky; top: 0; z-index: 100; }
-        .biblia-box { margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.15); border-radius: 15px; border-left: 4px solid var(--gold); text-align: left; }
-        .versiculo { font-style: italic; font-size: 0.85rem; line-height: 1.4; }
-        .peso-display { font-size: 2.2rem; font-weight: 900; margin-top: 10px; }
+        /* HEADER */
+        .header { background: linear-gradient(135deg, var(--black), var(--dark-p)); color: white; text-align: center; padding: 25px 15px; border-radius: 0 0 30px 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .biblia-box { margin-top: 10px; padding: 12px; background: rgba(255,255,255,0.1); border-radius: 12px; border-left: 4px solid var(--gold); font-size: 0.85rem; font-style: italic; }
+        .peso-display { font-size: 2.2rem; font-weight: 900; margin-top: 10px; color: var(--gold); }
 
         .container { padding: 15px; max-width: 600px; margin: auto; }
-        .card { background: var(--white); border-radius: 20px; padding: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; }
+        .card { background: white; border-radius: 20px; padding: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; border: 1px solid rgba(0,0,0,0.05); }
 
-        .exercise-item { border-bottom: 1px solid #eee; padding: 15px 0; }
-        .ex-instr { background: #fdf7ff; padding: 12px; border-radius: 12px; font-size: 0.85rem; line-height: 1.4; margin-top: 8px; border-left: 3px solid var(--medium-purple); }
-        
-        .btn-main { background: var(--dark-purple); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: bold; width: 100%; cursor: pointer; margin-bottom: 10px; }
-        .dia-btn { flex:1; padding:10px; border-radius:10px; border:1px solid #ddd; font-weight:bold; cursor:pointer; background:white; }
-        .dia-btn.active { background: var(--medium-purple) !important; color: white !important; }
+        /* EJERCICIOS DETALLADOS */
+        .ex-item { border-bottom: 1px solid #eee; padding: 15px 0; }
+        .ex-title { font-weight: 800; color: var(--dark-p); display: flex; justify-content: space-between; }
+        .ex-instr { background: #fdf7ff; padding: 12px; border-radius: 10px; font-size: 0.85rem; line-height: 1.4; margin: 8px 0; border-left: 3px solid var(--med-p); }
+        .tag { font-size: 0.7rem; background: var(--light-p); padding: 3px 8px; border-radius: 5px; color: var(--med-p); font-weight: bold; }
+
+        /* BOTONES */
+        .btn-main { background: var(--dark-p); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: bold; width: 100%; cursor: pointer; margin-bottom: 10px; }
+        .dia-btn { flex:1; padding:12px; border-radius:12px; border:1px solid #ddd; font-weight:bold; cursor:pointer; background:white; }
+        .dia-btn.active { background: var(--med-p) !important; color: white !important; }
+
+        /* NAVEGACIÓN */
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #ddd; z-index: 1000; }
+        .nav-item { text-align: center; font-size: 0.75rem; opacity: 0.4; flex: 1; cursor: pointer; }
+        .nav-item.active { opacity: 1; color: var(--dark-p); font-weight: bold; }
         
         input, textarea { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd; margin-bottom: 10px; box-sizing: border-box; font-size: 16px; }
-        .hist-img { width: 100%; border-radius: 15px; margin-top: 10px; }
-
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #ddd; z-index: 1000; }
-        .nav-item { text-align: center; font-size: 0.7rem; opacity: 0.4; flex: 1; cursor: pointer; }
-        .nav-item.active { opacity: 1; color: var(--dark-purple); font-weight: bold; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
+        .hist-img { width: 100%; border-radius: 15px; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <div id="lock-screen">
     <h1 style="color:var(--gold); margin:0;">VICTORIA OMEGA</h1>
-    <p style="opacity:0.8">TUS DATOS ESTÁN SEGUROS</p>
+    <p style="opacity:0.8; font-size: 0.9rem;">"TODO LO PUEDO EN CRISTO"</p>
     <input type="password" id="pass-input" placeholder="0000" inputmode="numeric">
-    <button class="btn-main" style="background:var(--gold); color:black; width:220px; border-radius:30px;" onclick="checkPass()">ENTRAR</button>
+    <button class="btn-main" style="background:var(--gold); color:black; width:200px; border-radius:30px;" onclick="checkPass()">ACCEDER</button>
 </div>
 
 <div id="app-container" style="display:none;">
     <div class="header">
-        <div class="biblia-box">
-            <span class="versiculo">"Todo lo puedo en Cristo que me fortalece." (Fil. 4:13)</span>
-        </div>
+        <div class="biblia-box" id="biblia-txt">"Cargando versículo..."</div>
         <div class="peso-display"><span id="peso-actual">0.0</span> <small>kg</small></div>
-        <button onclick="location.reload()" style="background:none; border:none; color:white; font-size:0.7rem; text-decoration:underline;">Cerrar Sesión</button>
+        <div style="font-size: 0.7rem; opacity: 0.8;">MEMORIA ACTIVA Y GUARDADA</div>
     </div>
 
     <div class="container">
         <div id="tab-entreno" class="tab-content active">
-            <div style="display:flex; gap:5px; margin-bottom:15px;">
+            <div style="display:flex; gap:8px; margin-bottom:15px;">
                 <button class="dia-btn active" onclick="setDia(1, this)">D1</button>
                 <button class="dia-btn" onclick="setDia(2, this)">D2</button>
                 <button class="dia-btn" onclick="setDia(3, this)">D3</button>
+                <button class="dia-btn" onclick="setDia(4, this)">D4</button>
             </div>
             <div class="card">
-                <h3 id="area-titulo" style="color:var(--dark-purple); margin:0;"></h3>
+                <h3 id="area-titulo" style="margin:0; color:var(--dark-p)"></h3>
                 <div id="lista-ejercicios"></div>
+            </div>
+            <div class="card" style="border: 2px solid var(--gold)">
+                <h3 style="margin-top:0">🕊️ Diario de Fe</h3>
+                <textarea id="nota-fe" rows="3" placeholder="Tu oración o victoria de hoy..."></textarea>
+                <button class="btn-main" onclick="saveNota()">GUARDAR EN DIARIO</button>
             </div>
         </div>
 
         <div id="tab-tracker" class="tab-content">
-            <div class="card" style="border: 2px solid var(--food-orange)">
-                <h3>📸 Foto de Comida</h3>
-                <input type="file" id="foto-input" accept="image/*" onchange="comprimirImagen(this)" style="display:none">
-                <button class="btn-main" style="background:var(--food-orange)" onclick="document.getElementById('foto-input').click()">TOMAR FOTO</button>
-                <img id="preview-comida" src="" style="width:100%; border-radius:15px; display:none; margin-bottom:10px;">
+            <div class="card" style="border: 2px solid var(--orange)">
+                <h3 style="color:var(--orange); margin-top:0;">📸 Registro Nutricional</h3>
+                <input type="file" id="foto-input" accept="image/*" onchange="processImg(this)" style="display:none">
+                <button class="btn-main" style="background:var(--orange)" onclick="document.getElementById('foto-input').click()">TOMAR FOTO PLATO</button>
+                <img id="preview-img" style="width:100%; border-radius:15px; display:none; margin-bottom:10px;">
                 <textarea id="desc-comida" placeholder="¿Qué comiste hoy?"></textarea>
-                <button class="btn-main" style="background:black" onclick="guardarComida()">GUARDAR COMIDA</button>
+                <button class="btn-main" style="background:black" onclick="saveComida()">GUARDAR COMIDA</button>
             </div>
 
             <div class="card">
-                <h3>⚖️ Peso y Medidas</h3>
+                <h3 style="margin-top:0">⚖️ Medidas del Templo</h3>
                 <input type="number" id="in-peso" step="0.1" placeholder="Peso (kg)">
-                <input type="number" id="in-cin" placeholder="Cintura (cm)">
-                <button class="btn-main" onclick="saveProgreso()">ACTUALIZAR DATOS</button>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px">
+                    <input type="number" id="in-cin" placeholder="Cintura (cm)">
+                    <input type="number" id="in-cad" placeholder="Cadera (cm)">
+                </div>
+                <button class="btn-main" onclick="saveStats()">ACTUALIZAR PROGRESO</button>
+            </div>
+
+            <div class="card" style="border: 2px solid var(--pink)">
+                <h3 style="color:var(--pink); margin-top:0;">🌸 Ciclo Menstrual</h3>
+                <label><small>Fecha Inicio:</small></label>
+                <input type="date" id="ciclo-date">
+                <button class="btn-main" style="background:var(--pink)" onclick="saveCiclo()">REGISTRAR CICLO</button>
             </div>
         </div>
 
         <div id="tab-historial" class="tab-content">
-            <h3 style="margin-left:10px">📜 Mi Historial Guardado</h3>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h3>📜 Mi Historial</h3>
+                <button onclick="clearData()" style="background:none; border:none; color:red; font-size:0.7rem;">Borrar Todo</button>
+            </div>
             <div id="historial-render"></div>
         </div>
     </div>
 
     <nav class="nav-bar">
-        <div class="nav-item active" onclick="showTab('tab-entreno', this)">🏋️<br>Rutina</div>
-        <div class="nav-item" onclick="showTab('tab-tracker', this)">📊<br>Tracker</div>
-        <div class="nav-item" onclick="showTab('tab-historial', this)">📜<br>Historial</div>
+        <div class="nav-item active" onclick="showTab('tab-entreno', this)">🏋️<br>Entreno</div>
+        <div class="nav-item" onclick="showTab('tab-tracker', this)">📊<br>Medir</div>
+        <div class="nav-item" onclick="showTab('tab-historial', this)">📜<br>Historia</div>
     </nav>
 </div>
 
 <script>
     const CLAVE = "7481";
-    // AQUÍ SE CARGAN LOS DATOS GUARDADOS AL ABRIR LA APP
-    let dbLogs = JSON.parse(localStorage.getItem('victoria_omega_db')) || [];
-    let currentPhotoBase64 = "";
+    let db = JSON.parse(localStorage.getItem('victoria_omega_v3')) || [];
+    let tempImg = "";
 
     const RUTINAS = {
         1: { t: "Piernas y Glúteos", e: [
-            {n:"Thigh Master Aductores", i:"Sentada, aprieta el aparato rosa entre tus rodillas con fuerza. 4x30.", tg:"Rosa"},
-            {n:"Puente Glúteo", i:"Boca arriba con banda morada. Sube cadera apretando fuerte. 4x20.", tg:"Morado"}
+            {n:"Thigh Master Aductores", i:"Sentada, coloca el aparato rosa entre tus rodillas. Aprieta con fuerza hacia adentro, sostén 1 seg y abre lento.", r:"4x30", g:"Rosa"},
+            {n:"Puente Glúteo con Banda", i:"Boca arriba, banda morada sobre rodillas. Sube cadera apretando glúteos y mantén tensión hacia afuera.", r:"4x20", g:"Morado"},
+            {n:"Patada Glúteo Mat", i:"En 4 puntos. Estira pierna hacia atrás y sube sin arquear espalda. Aprieta arriba.", r:"4x25 p/p", g:"Mat"}
         ]},
         2: { t: "Tren Superior", e: [
-            {n:"Pecho Thigh Master", i:"Aprieta el aparato frente a tu pecho con los codos abiertos. 4x25.", tg:"Rosa"}
+            {n:"Pecho Thigh Master", i:"Sujeta asas frente al pecho. Cierra codos intentando que el aparato se toque en el centro.", r:"4x25", g:"Rosa"},
+            {n:"Remo con Banda", i:"Sentada, banda en pies. Jala hacia atrás apretando espalda y codos pegados.", r:"4x20", g:"Morado"}
         ]},
-        3: { t: "Abdomen", e: [
-            {n:"Plancha Mat", i:"Cuerpo recto en el mat, abdomen contraído. 4x45 seg.", tg:"Mat"}
+        3: { t: "Abdomen Fuerte", e: [
+            {n:"Crunch con Resistencia", i:"Abdominal corto apretando el aparato rosa entre las rodillas al mismo tiempo.", r:"4x25", g:"Rosa"},
+            {n:"Plancha Mat", i:"Apoya antebrazos. Cuerpo recto y abdomen muy contraído.", r:"4x45 seg", g:"Mat"}
+        ]},
+        4: { t: "Full Body Mix", e: [
+            {n:"Burpees de Victoria", i:"Baja a plancha y sube con un salto pequeño de victoria.", r:"4x12", g:"Cuerpo"},
+            {n:"Mix Thigh Master", i:"20 seg brazos / 20 seg piernas durante 1 min.", r:"4 series", g:"Rosa"}
         ]}
     };
 
@@ -126,12 +153,17 @@
         if(document.getElementById('pass-input').value === CLAVE) {
             document.getElementById('lock-screen').style.display = 'none';
             document.getElementById('app-container').style.display = 'block';
-            setDia(1, document.querySelector('.dia-btn'));
-            renderHistorial();
+            init();
         } else { alert("Clave Incorrecta"); }
     }
 
-    function comprimirImagen(input) {
+    function init() {
+        setDia(1, document.querySelector('.dia-btn'));
+        renderHistorial();
+        document.getElementById('biblia-txt').innerText = '"¿No te he dicho que si crees, verás la gloria de Dios? (Juan 11:40). Mas los que esperan a Jehová tendrán nuevas fuerzas."';
+    }
+
+    function processImg(input) {
         if (input.files && input.files[0]) {
             const reader = new FileReader();
             reader.onload = function(e) {
@@ -140,65 +172,70 @@
                 img.onload = function() {
                     const canvas = document.createElement('canvas');
                     const scale = 500 / img.width;
-                    canvas.width = 500;
-                    canvas.height = img.height * scale;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                    currentPhotoBase64 = canvas.toDataURL('image/jpeg', 0.5);
-                    document.getElementById('preview-comida').src = currentPhotoBase64;
-                    document.getElementById('preview-comida').style.display = 'block';
+                    canvas.width = 500; canvas.height = img.height * scale;
+                    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+                    tempImg = canvas.toDataURL('image/jpeg', 0.5);
+                    document.getElementById('preview-img').src = tempImg;
+                    document.getElementById('preview-img').style.display = 'block';
                 }
             }
             reader.readAsDataURL(input.files[0]);
         }
     }
 
-    function guardarComida() {
-        const desc = document.getElementById('desc-comida').value;
-        if(desc || currentPhotoBase64) {
-            addLog(`🍱 Comida: ${desc}`, currentPhotoBase64);
-            document.getElementById('preview-comida').style.display = 'none';
-            currentPhotoBase64 = ""; document.getElementById('desc-comida').value = "";
-            alert("¡Guardado en el teléfono!");
-        }
-    }
-
-    function saveProgreso() {
-        const p = document.getElementById('in-peso').value;
-        if(p) { 
-            addLog(`⚖️ Peso: ${p}kg`); 
-            document.getElementById('peso-actual').innerText = p; 
-            alert("¡Peso guardado!"); 
-        }
-    }
-
-    // ESTA ES LA FUNCIÓN QUE ESCRIBE EN LA MEMORIA DEL TELÉFONO
     function addLog(txt, img = null) {
-        dbLogs.unshift({fecha: new Date().toLocaleString(), txt, img});
-        localStorage.setItem('victoria_omega_db', JSON.stringify(dbLogs)); // GUARDA AQUÍ
+        db.unshift({ f: new Date().toLocaleString(), t: txt, i: img });
+        localStorage.setItem('victoria_omega_v3', JSON.stringify(db));
         renderHistorial();
     }
 
+    function saveComida() {
+        const d = document.getElementById('desc-comida').value;
+        if(d || tempImg) {
+            addLog(`🍱 Nutrición: ${d}`, tempImg);
+            document.getElementById('desc-comida').value = "";
+            document.getElementById('preview-img').style.display = 'none';
+            tempImg = ""; alert("¡Comida Guardada!");
+        }
+    }
+
+    function saveStats() {
+        const p = document.getElementById('in-peso').value;
+        if(p) {
+            addLog(`⚖️ Medidas: Peso ${p}kg, Cin: ${document.getElementById('in-cin').value}cm`);
+            document.getElementById('peso-actual').innerText = p;
+            alert("¡Progreso Guardado!");
+        }
+    }
+
+    function saveNota() {
+        const n = document.getElementById('nota-fe').value;
+        if(n) { addLog(`🕊️ Diario: ${n}`); document.getElementById('nota-fe').value = ""; alert("¡Nota Guardada!"); }
+    }
+
+    function saveCiclo() {
+        const d = document.getElementById('ciclo-date').value;
+        if(d) { addLog(`🌸 Ciclo: Inicio el ${d}`); alert("¡Ciclo Guardado!"); }
+    }
+
     function renderHistorial() {
-        const render = document.getElementById('historial-render');
-        render.innerHTML = dbLogs.map(l => `
-            <div class="card" style="border-left:5px solid var(--medium-purple)">
-                <small><b>${l.fecha}</b></small><br>${l.txt}
-                ${l.img ? `<br><img src="${l.img}" class="hist-img">` : ''}
+        document.getElementById('historial-render').innerHTML = db.map(l => `
+            <div class="card" style="border-left:5px solid var(--med-p)">
+                <small><b>${l.f}</b></small><br>${l.t}
+                ${l.i ? `<br><img src="${l.i}" class="hist-img">` : ''}
             </div>`).join('');
-        
-        // Carga el último peso registrado en el círculo principal
-        const ultimoPeso = dbLogs.find(log => log.txt.includes('Peso:'));
-        if(ultimoPeso) document.getElementById('peso-actual').innerText = ultimoPeso.txt.split(' ')[2].replace('kg', '');
+        const lastP = db.find(l => l.t.includes('Peso '));
+        if(lastP) document.getElementById('peso-actual').innerText = lastP.t.split(' ')[2].replace('kg,', '');
     }
 
     function setDia(d, btn) {
         const info = RUTINAS[d];
         document.getElementById('area-titulo').innerText = info.t;
         document.getElementById('lista-ejercicios').innerHTML = info.e.map(ex => `
-            <div class="exercise-item">
-                <b>${ex.n}</b> <small>(${ex.tg})</small>
+            <div class="ex-item">
+                <div class="ex-title"><span>${ex.n}</span> <span class="tag">${ex.g}</span></div>
                 <div class="ex-instr">${ex.i}</div>
+                <div style="font-size:0.8rem; color:var(--pink); font-weight:bold;">🎯 Objetivo: ${ex.r}</div>
             </div>`).join('');
         document.querySelectorAll('.dia-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -207,9 +244,10 @@
     function showTab(id, el) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        el.classList.add('active');
+        document.getElementById(id).classList.add('active'); el.classList.add('active');
     }
+
+    function clearData() { if(confirm("¿Borrar todo el historial?")) { localStorage.clear(); location.reload(); } }
 </script>
 </body>
 </html>
